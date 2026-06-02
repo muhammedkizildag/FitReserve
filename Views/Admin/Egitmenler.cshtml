@@ -1,0 +1,82 @@
+@model AdminEgitmenlerViewModel
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Egitmenler";
+}
+
+@if (Model.BekleyenKayitTalepleri.Any())
+{
+    <section class="ders-bolumu">
+        <h2>Bekleyen Egitmen Kayit Talepleri</h2>
+        <div class="tablo-kapsayici">
+            <table class="table admin-tablo">
+                <thead>
+                    <tr>
+                        <th>Ad Soyad</th>
+                        <th>Uzmanlik</th>
+                        <th>Eposta</th>
+                        <th>Telefon</th>
+                        <th>Talep Tarihi</th>
+                        <th class="text-end">Islemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var talep in Model.BekleyenKayitTalepleri)
+                {
+                    <tr>
+                        <td>@talep.AdSoyad</td>
+                        <td>@talep.UzmanlikAlani</td>
+                        <td>@talep.Eposta</td>
+                        <td>@talep.Telefon</td>
+                        <td>@talep.TalepTarihi.ToString("dd.MM.yyyy HH:mm")</td>
+                        <td class="text-end">
+                            <form class="satir-form" asp-action="EgitmenKayitTalebiOnayla" asp-route-id="@talep.Id" method="post">
+                                @Html.AntiForgeryToken()
+                                <button class="btn btn-sm btn-outline-success" type="submit">Onayla</button>
+                            </form>
+                            <form class="satir-form" asp-action="EgitmenKayitTalebiReddet" asp-route-id="@talep.Id" method="post">
+                                @Html.AntiForgeryToken()
+                                <button class="btn btn-sm btn-outline-danger" type="submit">Reddet</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </section>
+}
+
+<div class="tablo-kapsayici">
+    <table class="table admin-tablo">
+        <thead>
+            <tr>
+                <th>Ad Soyad</th>
+                <th>Uzmanlik</th>
+                <th>Eposta</th>
+                <th>Telefon</th>
+                <th>Durum</th>
+                <th class="text-end">Islemler</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var egitmen in Model.Egitmenler)
+        {
+            <tr>
+                <td>@egitmen.AdSoyad</td>
+                <td>@egitmen.UzmanlikAlani</td>
+                <td>@egitmen.Eposta</td>
+                <td>@egitmen.Telefon</td>
+                <td><span class="durum @(egitmen.AktifMi ? "aktif" : "pasif")">@(egitmen.AktifMi ? "Aktif" : "Pasif")</span></td>
+                <td class="text-end">
+                    <a class="btn btn-sm btn-outline-primary" asp-action="EgitmenGuncelle" asp-route-id="@egitmen.Id">Guncelle</a>
+                    <form class="satir-form" asp-action="EgitmenligiBitir" asp-route-id="@egitmen.Id" method="post">
+                        @Html.AntiForgeryToken()
+                        <button class="btn btn-sm btn-outline-danger" type="submit">Egitmenligi Bitir</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

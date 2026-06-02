@@ -1,0 +1,76 @@
+@model UyeGrupDersleriViewModel
+@{
+    Layout = "_UyeLayout";
+    ViewData["Title"] = "Grup Dersleri";
+}
+
+<div class="card-glass">
+    <h3>🗓️ Haftalık Grup Ders Programı</h3>
+    <p class="text-secondary">Eğitmenlerimiz eşliğinde gerçekleştirilen grup derslerine aşağıdan katılım sağlayabilirsiniz. Katıldığınız dersleri başlangıç saatine 2 saat kalana kadar iptal edebilirsiniz.</p>
+</div>
+
+<div class="card-glass secondary">
+    <h3>Dersler</h3>
+    @if (Model.TumDersler.Any())
+    {
+        <div class="ders-listesi">
+            @foreach (var ders in Model.TumDersler)
+            {
+                var isJoined = Model.KayitliDersIdleri.Contains(ders.Id);
+                var isFull = ders.KatilimciSayisi >= ders.Kapasite;
+                var canCancel = ders.BaslangicZamani - DateTime.Now >= TimeSpan.FromHours(2);
+                var dolulukOrani = (int)((double)ders.KatilimciSayisi / ders.Kapasite * 100);
+
+                <div class="ders-karti @(ders.IptalMi ? "iptal" : "")">
+                    <div class="sol-bolum">
+                        <h4>@ders.DersAdi</h4>
+                        <span class="egitmen">👤 Eğitmen: @ders.EgitmenAdi</span>
+                        <div class="bilgiler">
+                            <span>📅 @ders.BaslangicZamani.ToString("dd.MM.yyyy HH:mm")</span>
+                            <span>⏱️ @ders.SureDakika dk</span>
+                        </div>
+                    </div>
+                    
+                    <div class="sag-bolum">
+                        <div class="kontenjan-metni">Kontenjan: @ders.KatilimciSayisi / @ders.Kapasite</div>
+                        <div class="kontenjan-bar" title="Doluluk oranı: %@dolulukOrani">
+                            <div class="kontenjan-doluluk" style="width: @(dolulukOrani)%"></div>
+                        </div>
+
+                        @if (ders.IptalMi)
+                        {
+                            <span class="badge bg-danger">İptal Edildi</span>
+                        }
+                        else if (isJoined)
+                        {
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge-joined">✓ Kayıtlısınız</span>
+                                <form asp-action="DersRezervasyonIptal" asp-route-dersId="@ders.Id" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn-custom-danger" @(canCancel ? "" : "disabled title='Dersin başlamasına 2 saatten az kaldığı için iptal edilemez.'")>
+                                        İptal Et
+                                    </button>
+                                </form>
+                            </div>
+                        }
+                        else if (isFull)
+                        {
+                            <span class="badge-full">🚫 Kontenjan Dolu</span>
+                        }
+                        else
+                        {
+                            <form asp-action="DersRezervasyonYap" asp-route-dersId="@ders.Id" method="post">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn-custom">Kayıt Ol</button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p class="text-muted">Yakın zamanda planlanmış herhangi bir grup dersi bulunmuyor.</p>
+    }
+</div>

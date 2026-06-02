@@ -1,0 +1,178 @@
+@model LoginSayfasiViewModel
+@{
+    Layout = null;
+    ViewData["Title"] = "Giris Yap";
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FitReserve</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+</head>
+<body>
+    <main class="login-kapsayici">
+        <section class="login-marka">
+            <span class="fitreserve-logo" aria-hidden="true">
+                <span></span>
+            </span>
+            <h1>FitReserve</h1>
+        </section>
+
+        <section class="login-panel">
+            @if (TempData["BasariMesaji"] is not null)
+            {
+                <div class="alert alert-success">@TempData["BasariMesaji"]</div>
+            }
+
+            @if (TempData["HataMesaji"] is not null)
+            {
+                <div class="alert alert-danger">@TempData["HataMesaji"]</div>
+            }
+
+            <div id="girisPaneli">
+            <form asp-action="GirisYap" method="post">
+                @Html.AntiForgeryToken()
+                <div class="mb-3">
+                    <label asp-for="Giris.Rol" class="form-label">Rol</label>
+                    <select asp-for="Giris.Rol" class="form-select" id="rolSecimi">
+                        <option value="">Rol seciniz</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Uye">Uye</option>
+                        <option value="Egitmen">Egitmen</option>
+                    </select>
+                    <span asp-validation-for="Giris.Rol" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Giris.Eposta" class="form-label">Eposta</label>
+                    <input asp-for="Giris.Eposta" class="form-control" />
+                    <span asp-validation-for="Giris.Eposta" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Giris.Sifre" class="form-label">Sifre</label>
+                    <input asp-for="Giris.Sifre" type="password" class="form-control" />
+                    <span asp-validation-for="Giris.Sifre" class="text-danger"></span>
+                </div>
+                <button class="btn btn-primary w-100" type="submit">Giris Yap</button>
+            </form>
+
+            <div class="kayit-butonlari">
+                <button class="btn btn-outline-primary w-100 d-none" id="uyeKayitButonu" type="button">Kayit Ol</button>
+                <button class="btn btn-outline-primary w-100 d-none" id="egitmenKayitButonu" type="button">Kayit Ol</button>
+            </div>
+            </div>
+
+            <div class="kayit-paneli d-none" id="uyeKayitPaneli">
+                <h2>Uye Kayit</h2>
+                <form asp-action="UyeKayitOl" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="mb-3">
+                        <label asp-for="UyeKayit.AdSoyad" class="form-label">Ad Soyad</label>
+                        <input asp-for="UyeKayit.AdSoyad" class="form-control" />
+                        <span asp-validation-for="UyeKayit.AdSoyad" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="UyeKayit.Eposta" class="form-label">Eposta</label>
+                        <input asp-for="UyeKayit.Eposta" class="form-control" />
+                        <span asp-validation-for="UyeKayit.Eposta" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="UyeKayit.Telefon" class="form-label">Telefon</label>
+                        <input asp-for="UyeKayit.Telefon" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="UyeKayit.UyelikPaketiAdi" class="form-label">Uyelik Paketi</label>
+                        <select asp-for="UyeKayit.UyelikPaketiAdi" class="form-select">
+                            <option value="">Paket seciniz</option>
+                            @foreach (var paket in Model.UyelikPaketleri)
+                            {
+                                <option value="@paket.Ad">@paket.Ad</option>
+                            }
+                        </select>
+                        <span asp-validation-for="UyeKayit.UyelikPaketiAdi" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="UyeKayit.Sifre" class="form-label">Sifre</label>
+                        <input asp-for="UyeKayit.Sifre" type="password" class="form-control" />
+                        <span asp-validation-for="UyeKayit.Sifre" class="text-danger"></span>
+                    </div>
+                    <button class="btn btn-primary w-100" type="submit">Kaydi Tamamla</button>
+                </form>
+                <button class="btn btn-outline-secondary w-100 mt-2 girise-don" type="button">Geri Don</button>
+            </div>
+
+            <div class="kayit-paneli d-none" id="egitmenKayitPaneli">
+                <h2>Egitmen Kayit</h2>
+                <form asp-action="EgitmenKayitOl" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="mb-3">
+                        <label asp-for="EgitmenKayit.AdSoyad" class="form-label">Ad Soyad</label>
+                        <input asp-for="EgitmenKayit.AdSoyad" class="form-control" />
+                        <span asp-validation-for="EgitmenKayit.AdSoyad" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="EgitmenKayit.UzmanlikAlani" class="form-label">Uzmanlik Alani</label>
+                        <input asp-for="EgitmenKayit.UzmanlikAlani" class="form-control" />
+                        <span asp-validation-for="EgitmenKayit.UzmanlikAlani" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="EgitmenKayit.Eposta" class="form-label">Eposta</label>
+                        <input asp-for="EgitmenKayit.Eposta" class="form-control" />
+                        <span asp-validation-for="EgitmenKayit.Eposta" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="EgitmenKayit.Telefon" class="form-label">Telefon</label>
+                        <input asp-for="EgitmenKayit.Telefon" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="EgitmenKayit.Sifre" class="form-label">Sifre</label>
+                        <input asp-for="EgitmenKayit.Sifre" type="password" class="form-control" />
+                        <span asp-validation-for="EgitmenKayit.Sifre" class="text-danger"></span>
+                    </div>
+                    <button class="btn btn-primary w-100" type="submit">Talep Gonder</button>
+                </form>
+                <button class="btn btn-outline-secondary w-100 mt-2 girise-don" type="button">Geri Don</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        const rolSecimi = document.getElementById("rolSecimi");
+        const girisPaneli = document.getElementById("girisPaneli");
+        const uyeKayitButonu = document.getElementById("uyeKayitButonu");
+        const egitmenKayitButonu = document.getElementById("egitmenKayitButonu");
+        const uyeKayitPaneli = document.getElementById("uyeKayitPaneli");
+        const egitmenKayitPaneli = document.getElementById("egitmenKayitPaneli");
+
+        function kayitSecenekleriniGuncelle() {
+            uyeKayitButonu.classList.toggle("d-none", rolSecimi.value !== "Uye");
+            egitmenKayitButonu.classList.toggle("d-none", rolSecimi.value !== "Egitmen");
+        }
+
+        function kayitPaneliAc(panel) {
+            girisPaneli.classList.add("d-none");
+            uyeKayitPaneli.classList.add("d-none");
+            egitmenKayitPaneli.classList.add("d-none");
+            panel.classList.remove("d-none");
+        }
+
+        function giriseDon() {
+            girisPaneli.classList.remove("d-none");
+            uyeKayitPaneli.classList.add("d-none");
+            egitmenKayitPaneli.classList.add("d-none");
+        }
+
+        rolSecimi.addEventListener("change", kayitSecenekleriniGuncelle);
+        uyeKayitButonu.addEventListener("click", () => kayitPaneliAc(uyeKayitPaneli));
+        egitmenKayitButonu.addEventListener("click", () => kayitPaneliAc(egitmenKayitPaneli));
+        document.querySelectorAll(".girise-don").forEach((buton) => buton.addEventListener("click", giriseDon));
+        kayitSecenekleriniGuncelle();
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+@model List<Bildirim>
+@{
+    Layout = "_UyeLayout";
+    ViewData["Title"] = "Bildirimlerim";
+}
+
+<div class="card-glass">
+    <h3>🔔 Bildirim Merkezi</h3>
+    <p class="text-secondary">Rezervasyon durumlarınız, ders değişiklikleri ve admin duyuruları hakkındaki en güncel bilgileri buradan inceleyebilirsiniz.</p>
+</div>
+
+<div class="card-glass secondary">
+    @if (Model.Any())
+    {
+        <div class="bildirim-listesi">
+            @foreach (var bildirim in Model)
+            {
+                <div class="bildirim-karti @(!bildirim.OkunduMu ? "okunmadi" : "")">
+                    <div class="ikon-yeri">🔔</div>
+                    <div class="detay">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <h4 class="m-0">@bildirim.Baslik</h4>
+                            <span class="tarih text-muted" style="font-size: 12px;">📅 @bildirim.GonderimTarihi.ToString("dd MMMM yyyy HH:mm")</span>
+                        </div>
+                        <p class="m-0">@bildirim.Mesaj</p>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p class="text-muted">Görüntülenecek herhangi bir bildiriminiz bulunmamaktadır.</p>
+    }
+</div>

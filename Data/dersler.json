@@ -1,0 +1,58 @@
+[
+  {
+    "Id": 1,
+    "Ad": "Pilates",
+    "Kategori": "Grup Dersi",
+    "EgitmenAdi": "Selin Arslan",
+    "SureDakika": 50,
+    "AktifMi": true
+  },
+  {
+    "Id": 2,
+    "Ad": "Yoga",
+    "Kategori": "Grup Dersi",
+    "EgitmenAdi": "Mina Akbas",
+    "SureDakika": 60,
+    "AktifMi": true
+  },
+  {
+    "Id": 3,
+    "Ad": "Nefes ve Esneklik",
+    "Kategori": "Grup Dersi",
+    "EgitmenAdi": "Mina Akbas",
+    "SureDakika": 45,
+    "AktifMi": true
+  },
+  {
+    "Id": 4,
+    "Ad": "Cross Training",
+    "Kategori": "Grup Dersi",
+    "EgitmenAdi": "Taylan Ergin",
+    "SureDakika": 50,
+    "AktifMi": true
+  },
+  {
+    "Id": 5,
+    "Ad": "Kardiyo ve Zumba",
+    "Kategori": "Grup Dersi",
+    "EgitmenAdi": "Ece Karahan",
+    "SureDakika": 45,
+    "AktifMi": true
+  },
+  {
+    "Id": 6,
+    "Ad": "Spinning",
+    "Kategori": "Grup Dersi",
+    "EgitmenAdi": "Aylin Karahan",
+    "SureDakika": 45,
+    "AktifMi": true
+  },
+  {
+    "Id": 7,
+    "Ad": "Boks",
+    "Kategori": "Grup Dersi",
+    "EgitmenAdi": "Bora Sancak",
+    "SureDakika": 50,
+    "AktifMi": true
+  }
+]

@@ -1,0 +1,135 @@
+@model UyeDashboardViewModel
+@{
+    Layout = "_UyeLayout";
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="row">
+    <!-- Profil Bilgileri -->
+    <div class="col-lg-12">
+        <div class="card-glass">
+            <h3>👤 Üyelik Bilgilerim</h3>
+            <div class="profil-kutusu">
+                <div class="profil-ogesi">
+                    <span>Ad Soyad</span>
+                    <p>@Model.Uye.AdSoyad</p>
+                </div>
+                <div class="profil-ogesi">
+                    <span>E-posta</span>
+                    <p>@Model.Uye.Eposta</p>
+                </div>
+                <div class="profil-ogesi">
+                    <span>Telefon</span>
+                    <p>@Model.Uye.Telefon</p>
+                </div>
+                <div class="profil-ogesi">
+                    <span>Mevcut Paket</span>
+                    <p class="text-info">💎 @Model.Uye.UyelikPaketiAdi</p>
+                </div>
+                <div class="profil-ogesi">
+                    <span>Kayıt Tarihi</span>
+                    <p>@Model.Uye.KayitTarihi.ToString("dd.MM.yyyy")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Gelecek Dersler & Rezervasyonlarım -->
+    <div class="col-md-7">
+        <div class="card-glass">
+            <h3>🗓️ Yaklaşan Grup Derslerim</h3>
+            @if (Model.GelecekDersler.Any())
+            {
+                <div class="ders-listesi">
+                    @foreach (var ders in Model.GelecekDersler)
+                    {
+                        <div class="ders-karti">
+                            <div class="sol-bolum">
+                                <h4>@ders.DersAdi</h4>
+                                <span class="egitmen">👤 Eğitmen: @ders.EgitmenAdi</span>
+                                <div class="bilgiler">
+                                    <span>📅 @ders.BaslangicZamani.ToString("dd.MM.yyyy HH:mm")</span>
+                                    <span>⏱️ @ders.SureDakika dk</span>
+                                </div>
+                            </div>
+                            <div class="sag-bolum">
+                                <form asp-action="DersRezervasyonIptal" asp-route-dersId="@ders.Id" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn-custom-danger">Kayıt İptal</button>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-muted">Yakın zamanda katıldığınız bir grup dersi bulunmuyor.</p>
+                <a class="btn btn-custom mt-2" asp-action="GrupDersleri">Ders Programını İncele</a>
+            }
+        </div>
+
+        <div class="card-glass secondary">
+            <h3>💪 Onaylanan 1e1 Özel Derslerim</h3>
+            @if (Model.GelecekOzelDersler.Any())
+            {
+                <table class="table-glass">
+                    <thead>
+                        <tr>
+                            <th>Eğitmen</th>
+                            <th>Ders Adı</th>
+                            <th>İstenen Zaman</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var talep in Model.GelecekOzelDersler)
+                        {
+                            <tr>
+                                <td class="text-info font-weight-bold">@talep.EgitmenAdi</td>
+                                <td>@talep.DersAdi</td>
+                                <td>@talep.IstenenTarih.ToString("dd.MM.yyyy HH:mm")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p class="text-muted">Yakın zamanda onaylanmış 1e1 özel dersiniz bulunmuyor.</p>
+                <a class="btn btn-custom mt-2" asp-action="OzelDersTalepleri">Özel Ders Talep Et</a>
+            }
+        </div>
+    </div>
+
+    <!-- Son Bildirimler -->
+    <div class="col-md-5">
+        <div class="card-glass">
+            <h3>🔔 Son Bildirimlerim (@Model.OkunmamisBildirimSayisi Okunmamış)</h3>
+            @if (Model.Bildirimler.Any())
+            {
+                <div class="bildirim-listesi">
+                    @foreach (var bildirim in Model.Bildirimler)
+                    {
+                        <div class="bildirim-karti @(!bildirim.OkunduMu ? "okunmadi" : "")">
+                            <div class="ikon-yeri">💬</div>
+                            <div class="detay">
+                                <h4>@bildirim.Baslik</h4>
+                                <p>@bildirim.Mesaj</p>
+                                <span class="tarih">@bildirim.GonderimTarihi.ToString("dd.MM.yyyy HH:mm")</span>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="text-center mt-3">
+                    <a class="btn btn-custom w-100" asp-action="Bildirimler">Tüm Bildirimleri Gör</a>
+                </div>
+            }
+            else
+            {
+                <p class="text-muted">Yeni veya geçmiş bir bildirim bulunmuyor.</p>
+            }
+        </div>
+    </div>
+</div>

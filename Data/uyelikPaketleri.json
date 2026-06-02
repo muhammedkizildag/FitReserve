@@ -1,0 +1,26 @@
+[
+  {
+    "Id": 1,
+    "Ad": "FitReserve Standart",
+    "Aciklama": "Sadece salon kullanımı.",
+    "SureGun": 30,
+    "Fiyat": 15000,
+    "AktifMi": true
+  },
+  {
+    "Id": 2,
+    "Ad": "FitReserve Plus",
+    "Aciklama": "Salon kullanımı ve 5 grup dersine katılım.",
+    "SureGun": 30,
+    "Fiyat": 20000,
+    "AktifMi": true
+  },
+  {
+    "Id": 3,
+    "Ad": "FitReserve Pro",
+    "Aciklama": "Salon kullnımı, sınırsız grup dersi ve 2 özel ders.",
+    "SureGun": 30,
+    "Fiyat": 30000,
+    "AktifMi": true
+  }
+]

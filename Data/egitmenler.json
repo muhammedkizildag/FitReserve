@@ -1,0 +1,65 @@
+[
+  {
+    "Id": 1,
+    "AdSoyad": "Selin Arslan",
+    "UzmanlikAlani": "Pilates",
+    "Eposta": "selin.arslan@fitreserve.com",
+    "Telefon": "0532 418 77 12",
+    "AktifMi": true,
+    "Sifre": "selinarslan"
+  },
+  {
+    "Id": 2,
+    "AdSoyad": "Can Yilmaz",
+    "UzmanlikAlani": "Kuvvet Antrenmani",
+    "Eposta": "can.yilmaz@fitreserve.com",
+    "Telefon": "0541 906 35 48",
+    "AktifMi": true,
+    "Sifre": "canyilmaz"
+  },
+  {
+    "Id": 3,
+    "AdSoyad": "Mina Akbas",
+    "UzmanlikAlani": "Yoga",
+    "Eposta": "mina.akbas@fitreserve.com",
+    "Telefon": "0507 263 84 19",
+    "AktifMi": true,
+    "Sifre": "minaakbas"
+  },
+  {
+    "Id": 4,
+    "AdSoyad": "Taylan Ergin",
+    "UzmanlikAlani": "Cross Training",
+    "Eposta": "taylan.ergin@fitreserve.com",
+    "Telefon": "0553 691 20 74",
+    "AktifMi": true,
+    "Sifre": "taylanergin"
+  },
+  {
+    "Id": 5,
+    "AdSoyad": "Ece Karahan",
+    "UzmanlikAlani": "Kardiyo ve Zumba",
+    "Eposta": "ece.karahan@fitreserve.com",
+    "Telefon": "0536 125 98 43",
+    "AktifMi": true,
+    "Sifre": "ecekarahan"
+  },
+  {
+    "Id": 6,
+    "AdSoyad": "Bora Sancak",
+    "UzmanlikAlani": "Boks",
+    "Eposta": "bora.sancak@fitreserve.com",
+    "Telefon": "0544 782 61 05",
+    "AktifMi": true,
+    "Sifre": "borasancak"
+  },
+  {
+    "Id": 8,
+    "AdSoyad": "Aylin Karan",
+    "UzmanlikAlani": "Spinning",
+    "Eposta": "aylin.karan@fitreserve.com",
+    "Telefon": "0532 640 91 27",
+    "AktifMi": true,
+    "Sifre": "aylinkaran"
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "Id": 1,
+    "Baslik": "Yeni ozel ders talebi",
+    "Mesaj": "Ayse Demir yeni bir ozel ders talebi olusturdu.",
+    "GonderimTarihi": "2026-05-27T10:05:00",
+    "OkunduMu": true
+  },
+  {
+    "Id": 2,
+    "Baslik": "Ders kapasitesi dolmak uzere",
+    "Mesaj": "Pilates dersinde son 4 kontenjan kaldi.",
+    "GonderimTarihi": "2026-05-27T17:15:00",
+    "OkunduMu": true
+  },
+  {
+    "Id": 3,
+    "Baslik": "Ders kapasitesi dolmak uzere",
+    "Mesaj": "Fonksiyonel Antrenman dersinde son 4 kontenjan kaldi.",
+    "GonderimTarihi": "2026-05-27T17:17:26",
+    "OkunduMu": true
+  },
+  {
+    "Id": 4,
+    "Baslik": "Yeni egitmen kayit talebi",
+    "Mesaj": "Aylin Karan egitmen olarak kayit olmak istiyor.",
+    "GonderimTarihi": "2026-05-28T13:20:00",
+    "OkunduMu": true
+  },
+  {
+    "Id": 5,
+    "Baslik": "Yeni egitmen kayit talebi",
+    "Mesaj": "Doruk Sen egitmen olarak kayit olmak istiyor.",
+    "GonderimTarihi": "2026-05-28T15:45:00",
+    "OkunduMu": true
+  }
+]

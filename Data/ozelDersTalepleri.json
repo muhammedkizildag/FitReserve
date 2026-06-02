@@ -1,0 +1,22 @@
+[
+  {
+    "Id": 1,
+    "UyeAdi": "Ayse Demir",
+    "EgitmenAdi": "Can Yilmaz",
+    "DersAdi": "Kuvvet Antrenman\u0131",
+    "TalepTarihi": "2026-05-27T10:00:00",
+    "IstenenTarih": "2026-05-29T11:30:00",
+    "Durum": "Onaylandi",
+    "Not": "Sabah saatleri uygundur."
+  },
+  {
+    "Id": 2,
+    "UyeAdi": "Mehmet Kaya",
+    "EgitmenAdi": "Selin Arslan",
+    "DersAdi": "Pilates",
+    "TalepTarihi": "2026-05-26T14:30:00",
+    "IstenenTarih": "2026-05-31T15:30:00",
+    "Durum": "Onaylandi",
+    "Not": ""
+  }
+]

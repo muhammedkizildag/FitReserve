@@ -1,0 +1,114 @@
+body {
+    background:
+        linear-gradient(90deg, rgba(17, 24, 39, 0.78), rgba(17, 24, 39, 0.38)),
+        url("../img/dashboard-gym.png") center / cover fixed;
+    min-height: 100vh;
+}
+
+.login-kapsayici {
+    align-items: center;
+    display: grid;
+    grid-template-columns: minmax(320px, 0.9fr) minmax(360px, 1.1fr);
+    min-height: 100vh;
+    padding: 48px;
+}
+
+.login-marka {
+    align-items: center;
+    background: transparent;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 32px;
+    text-align: center;
+}
+
+.fitreserve-logo {
+    align-items: center;
+    border: 3px solid rgba(255, 255, 255, 0.82);
+    border-radius: 50%;
+    display: inline-flex;
+    height: 78px;
+    justify-content: center;
+    margin-bottom: 22px;
+    position: relative;
+    width: 78px;
+}
+
+.fitreserve-logo::before,
+.fitreserve-logo::after,
+.fitreserve-logo span {
+    background: rgba(255, 255, 255, 0.82);
+    border-radius: 999px;
+    content: "";
+    display: block;
+    position: absolute;
+}
+
+.fitreserve-logo::before {
+    height: 12px;
+    width: 50px;
+}
+
+.fitreserve-logo::after {
+    height: 44px;
+    width: 12px;
+}
+
+.fitreserve-logo span {
+    height: 12px;
+    transform: rotate(-35deg);
+    width: 42px;
+}
+
+.login-marka h1 {
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: 0;
+    margin: 0;
+}
+
+.login-panel {
+    align-self: center;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+    justify-self: center;
+    max-width: 560px;
+    padding: 26px;
+    width: 100%;
+}
+
+.kayit-butonlari {
+    display: grid;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.kayit-paneli {
+    margin-top: 0;
+}
+
+.kayit-paneli h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 900px) {
+    .login-kapsayici {
+        grid-template-columns: 1fr;
+        padding: 24px;
+    }
+
+    .login-marka {
+        min-height: 220px;
+    }
+
+    .login-panel {
+        margin: 24px 0;
+        width: 100%;
+    }
+}

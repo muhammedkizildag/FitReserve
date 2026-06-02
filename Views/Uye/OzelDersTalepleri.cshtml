@@ -1,0 +1,103 @@
+@model UyeOzelDersViewModel
+@{
+    Layout = "_UyeLayout";
+    ViewData["Title"] = "1e1 Özel Ders";
+}
+
+<div class="row">
+    <!-- Özel Ders Talebi Oluşturma -->
+    <div class="col-md-5">
+        <div class="card-glass">
+            <h3>💪 Özel Ders Talep Et</h3>
+            <p class="text-secondary mb-4">Eğitmenlerimiz eşliğinde hedeflerinize yönelik birebir 1e1 antrenman planlamak için aşağıdaki formu doldurun.</p>
+            
+            <form asp-action="OzelDersTalepEt" method="post">
+                @Html.AntiForgeryToken()
+                
+                <div class="mb-3">
+                    <label for="egitmenAdi" class="form-label">Eğitmen Seçin</label>
+                    <select name="egitmenAdi" id="egitmenAdi" class="form-select form-glass" required>
+                        <option value="">Eğitmen seçiniz...</option>
+                        @foreach (var egitmen in Model.Egitmenler)
+                        {
+                            <option value="@egitmen.AdSoyad">@egitmen.AdSoyad (@egitmen.UzmanlikAlani)</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="dersAdi" class="form-label">Ders İçeriği / Adı</label>
+                    <input type="text" name="dersAdi" id="dersAdi" class="form-control form-glass" placeholder="Örn: Boks Teknikleri, Pilates Reformer, Güç Antrenmanı" required />
+                </div>
+
+                <div class="mb-3">
+                    <label for="istenenTarih" class="form-label">İstenen Tarih ve Saat</label>
+                    <input type="datetime-local" name="istenenTarih" id="istenenTarih" class="form-control form-glass" required />
+                </div>
+
+                <div class="mb-3">
+                    <label for="not" class="form-label">Eğitmene Not (İsteğe Bağlı)</label>
+                    <textarea name="not" id="not" class="form-control form-glass" rows="3" placeholder="Antrenman hedefleriniz veya sakatlık durumunuz hakkında bilgi yazabilirsiniz..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-custom w-100 mt-2">Talebi Gönder</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Geçmiş Talepler -->
+    <div class="col-md-7">
+        <div class="card-glass secondary">
+            <h3>📋 Özel Ders Taleplerim</h3>
+            @if (Model.Talepler.Any())
+            {
+                <table class="table-glass">
+                    <thead>
+                        <tr>
+                            <th>Eğitmen</th>
+                            <th>Ders Adı</th>
+                            <th>İstenen Tarih</th>
+                            <th>Durum</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var talep in Model.Talepler)
+                        {
+                            <tr>
+                                <td class="text-info font-weight-bold">@talep.EgitmenAdi</td>
+                                <td>@talep.DersAdi</td>
+                                <td>@talep.IstenenTarih.ToString("dd.MM.yyyy HH:mm")</td>
+                                <td>
+                                    @if (talep.Durum == "Bekliyor")
+                                    {
+                                        <span class="status-badge bekliyor">⌛ Bekliyor</span>
+                                    }
+                                    else if (talep.Durum == "Onaylandi")
+                                    {
+                                        <span class="status-badge onaylandi">✓ Onaylandı</span>
+                                    }
+                                    else if (talep.Durum == "Reddedildi")
+                                    {
+                                        <span class="status-badge reddedildi">✕ Reddedildi</span>
+                                    }
+                                    else if (talep.Durum == "Iptal Edildi")
+                                    {
+                                        <span class="status-badge iptal-edildi">🚫 İptal Edildi</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="status-badge">@talep.Durum</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p class="text-muted">Daha önce gönderdiğiniz bir özel ders talebi bulunmuyor.</p>
+            }
+        </div>
+    </div>
+</div>

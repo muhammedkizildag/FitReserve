@@ -1,0 +1,646 @@
+:root {
+    --admin-zemin: #0b0f19;
+    --admin-panel: rgba(17, 24, 39, 0.8);
+    --admin-yazi: #f3f4f6;
+    --admin-soluk: #9ca3af;
+    --admin-cizgi: rgba(255, 255, 255, 0.08);
+    --admin-vurgu: #6366f1;
+    --admin-yesil: #10b981;
+    --admin-kirmizi: #ef4444;
+    --admin-sari: #f59e0b;
+    
+    --accent-purple: #a855f7;
+    --accent-pink: #ec4899;
+    --grad-primary: linear-gradient(135deg, var(--admin-vurgu), var(--accent-purple));
+    --grad-pink-purple: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+    --grad-glow: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(168, 85, 247, 0.15));
+    --shadow-glow: 0 8px 30px rgba(99, 102, 241, 0.25);
+    --shadow-premium: 0 20px 40px rgba(0, 0, 0, 0.4);
+    --radius-lg: 16px;
+    --radius-md: 12px;
+}
+
+body {
+    background: var(--admin-zemin);
+    color: var(--admin-yazi);
+    font-family: 'Outfit', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.admin-kapsayici {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Navigation Menu */
+.admin-menu {
+    background: #0f1626;
+    color: #fff;
+    padding: 24px 18px;
+    border-right: 1px solid var(--admin-cizgi);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    width: 260px;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    box-shadow: 10px 0 30px rgba(0,0,0,0.2);
+}
+
+.admin-logo {
+    color: #fff;
+    display: block;
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 32px;
+    text-decoration: none;
+    background: var(--grad-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.admin-logo:hover {
+    color: #fff;
+    opacity: 0.9;
+}
+
+.admin-menu nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+}
+
+.admin-menu nav a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: var(--radius-md);
+    color: var(--admin-soluk);
+    padding: 12px 14px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    border: 1px solid transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.admin-menu nav a:hover {
+    background: rgba(255, 255, 255, 0.03);
+    color: #fff;
+    border-color: rgba(255,255,255,0.05);
+    transform: translateX(4px);
+}
+
+.admin-menu nav a.aktif,
+.admin-menu nav a[href*="Dashboard"]:hover {
+    /* fallback or generic highlights */
+}
+
+/* Specific button in sidebar */
+.cikis-linki {
+    border-top: 1px solid var(--admin-cizgi) !important;
+    margin-top: 15px;
+    padding-top: 16px !important;
+    background-color: rgba(239, 68, 68, 0.1) !important;
+    color: var(--admin-kirmizi) !important;
+    font-weight: 600;
+    justify-content: center !important;
+}
+
+.cikis-linki:hover {
+    background-color: var(--admin-kirmizi) !important;
+    color: #fff !important;
+    transform: none !important;
+}
+
+.menu-bildirim-linki {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.bildirim-rozeti {
+    align-items: center;
+    background: var(--grad-pink-purple);
+    border-radius: 999px;
+    color: #fff;
+    display: inline-flex;
+    font-size: 11px;
+    font-weight: 700;
+    height: 20px;
+    justify-content: center;
+    min-width: 20px;
+    padding: 0 6px;
+    box-shadow: 0 2px 8px rgba(236, 72, 153, 0.4);
+}
+
+/* Content Panel */
+.admin-icerik {
+    flex-grow: 1;
+    padding: 40px;
+    margin-left: 260px;
+    min-height: 100vh;
+}
+
+.admin-ust {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--admin-cizgi);
+    padding-bottom: 20px;
+}
+
+.admin-ust h1 {
+    font-size: 32px;
+    font-weight: 800;
+    margin: 0;
+    background: linear-gradient(135deg, #fff, var(--admin-soluk));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Statistics & Grids */
+.istatistik-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    margin-bottom: 30px;
+}
+
+.dashboard-hero {
+    align-items: center;
+    background:
+        linear-gradient(90deg, rgba(11, 15, 25, 0.8), rgba(11, 15, 25, 0.4)),
+        url("../img/dashboard-gym.png") center / cover;
+    border-radius: var(--radius-lg);
+    display: flex;
+    justify-content: center;
+    min-height: 240px;
+    overflow: hidden;
+    padding: 40px;
+    border: 1px solid var(--admin-cizgi);
+    box-shadow: var(--shadow-premium);
+}
+
+.dashboard-marka {
+    align-items: center;
+    color: rgba(255, 255, 255, 0.95);
+    display: flex;
+    gap: 18px;
+    text-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.dashboard-marka strong {
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.fitreserve-logo {
+    align-items: center;
+    border: 3px solid rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    display: inline-flex;
+    height: 70px;
+    justify-content: center;
+    position: relative;
+    width: 70px;
+    background: rgba(99, 102, 241, 0.2);
+    box-shadow: var(--shadow-glow);
+}
+
+.fitreserve-logo::before,
+.fitreserve-logo::after,
+.fitreserve-logo span {
+    background: #fff;
+    border-radius: 999px;
+    content: "";
+    display: block;
+    position: absolute;
+}
+
+.fitreserve-logo::before {
+    height: 10px;
+    width: 44px;
+}
+
+.fitreserve-logo::after {
+    height: 38px;
+    width: 10px;
+}
+
+.fitreserve-logo span {
+    height: 10px;
+    transform: rotate(-35deg);
+    width: 36px;
+}
+
+.dashboard-ozet-grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    margin-top: 30px;
+}
+
+/* Glass Panels */
+.istatistik-karti,
+.tablo-kapsayici,
+.admin-form {
+    background: var(--admin-panel);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--admin-cizgi);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-premium);
+    position: relative;
+    overflow: hidden;
+}
+
+.istatistik-karti::before,
+.tablo-kapsayici::before,
+.admin-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--grad-primary);
+    opacity: 0.8;
+}
+
+.istatistik-karti {
+    padding: 24px;
+    transition: all 0.3s;
+}
+
+.istatistik-karti:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-glow);
+    border-color: rgba(99,102,241,0.25);
+}
+
+.istatistik-karti span {
+    color: var(--admin-soluk);
+    display: block;
+    font-size: 13px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.istatistik-karti strong {
+    font-size: 32px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+}
+
+.sayfa-araclari {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 24px;
+}
+
+/* Table Design */
+.tablo-kapsayici {
+    overflow-x: auto;
+    padding: 20px;
+}
+
+.admin-tablo {
+    margin: 0;
+    min-width: 820px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-tablo thead th {
+    background-color: transparent !important;
+    color: var(--admin-soluk) !important;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-bottom: 1.5px solid var(--admin-cizgi);
+    padding: 16px;
+}
+
+.admin-tablo td {
+    background-color: transparent !important;
+    color: #fff !important;
+    padding: 16px;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--admin-cizgi);
+    font-size: 14px;
+}
+
+.admin-tablo tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-tablo tbody tr:hover td {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Status Badges */
+.durum {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+    line-height: 1;
+}
+
+.durum.aktif {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--admin-yesil);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.durum.pasif {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--admin-kirmizi);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.durum.bekliyor {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: var(--admin-sari);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.satir-form {
+    display: inline-block;
+    margin-left: 6px;
+}
+
+/* Form Styles */
+.admin-form {
+    max-width: 980px;
+    padding: 30px;
+}
+
+.form-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--admin-soluk);
+    margin-bottom: 8px;
+}
+
+.form-control, .form-select {
+    background: rgba(0,0,0,0.1);
+    border: 1px solid var(--admin-cizgi);
+    color: #fff;
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    transition: all 0.3s;
+}
+
+.form-control:focus, .form-select:focus {
+    background: rgba(0,0,0,0.15);
+    border-color: var(--admin-vurgu);
+    color: #fff;
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
+}
+
+.form-select option {
+    background-color: #0b0f19;
+    color: #fff;
+}
+
+.form-islemleri {
+    display: flex;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+/* Bootstrap Overrides */
+.btn-primary {
+    background: var(--grad-primary);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+    background: linear-gradient(135deg, #5356e2, #9640e5) !important;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+    color: #fff;
+}
+
+.btn-outline-primary {
+    background-color: transparent;
+    border: 1px solid var(--admin-vurgu);
+    color: var(--admin-vurgu);
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-outline-primary:hover {
+    background: var(--grad-primary);
+    border-color: transparent;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.btn-danger {
+    background-color: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: var(--admin-kirmizi);
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-danger:hover {
+    background-color: var(--admin-kirmizi);
+    color: #fff;
+    border-color: transparent;
+    transform: translateY(-2px);
+}
+
+.alert-success {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--admin-yesil);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: var(--radius-md);
+}
+
+.alert-danger {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--admin-kirmizi);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: var(--radius-md);
+}
+
+/* Scheduler / Course Layout in Admin */
+.dersler-yerlesim {
+    align-items: start;
+    display: grid;
+    gap: 30px;
+    grid-template-columns: minmax(340px, 380px) minmax(0, 1fr);
+}
+
+.ders-listesi {
+    background: var(--admin-panel);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--admin-cizgi);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-premium);
+}
+
+.ders-listesi h2,
+.ders-bolumu h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 20px;
+    color: #fff;
+}
+
+.ders-listesi ul {
+    display: grid;
+    gap: 12px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ders-listesi li {
+    border: 1px solid var(--admin-cizgi);
+    border-radius: var(--radius-md);
+    display: grid;
+    gap: 8px;
+    padding: 16px;
+    background-color: rgba(255,255,255,0.015);
+    transition: all 0.3s;
+}
+
+.ders-listesi li:hover {
+    background-color: rgba(255,255,255,0.03);
+    border-color: rgba(255,255,255,0.12);
+}
+
+.ders-listesi li strong {
+    color: #fff;
+    font-size: 16px;
+}
+
+.ders-listesi li span,
+.bos-metin,
+.hafta-basligi span {
+    color: var(--admin-soluk);
+    font-size: 13.5px;
+}
+
+.ders-listesi li .btn {
+    justify-self: stretch;
+    margin-top: 6px;
+}
+
+.haftalik-dersler {
+    display: grid;
+    gap: 20px;
+}
+
+.hafta-basligi {
+    align-items: center;
+    background: var(--admin-panel);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--admin-cizgi);
+    border-radius: var(--radius-lg);
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 24px;
+    box-shadow: var(--shadow-premium);
+}
+
+.hafta-basligi h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.ders-bolumu {
+    display: grid;
+    gap: 12px;
+}
+
+.form-ozet {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--admin-cizgi);
+    border-radius: var(--radius-md);
+    display: grid;
+    gap: 6px;
+    margin-bottom: 24px;
+    padding: 18px;
+}
+
+.form-ozet span {
+    color: var(--admin-soluk);
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.form-ozet strong {
+    color: #fff;
+    font-size: 16px;
+}
+
+/* Responsive adjust */
+@media (max-width: 991px) {
+    .admin-kapsayici {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-menu {
+        position: static;
+        height: auto;
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--admin-cizgi);
+    }
+
+    .admin-menu nav {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        display: grid;
+    }
+
+    .admin-icerik {
+        margin-left: 0;
+        padding: 24px;
+    }
+
+    .dersler-yerlesim {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-marka {
+        flex-direction: column;
+    }
+
+    .dashboard-marka strong {
+        font-size: 34px;
+    }
+
+    .dashboard-ozet-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,49 @@
+@model List<OzelDersTalebi>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Ozel Ders Talepleri";
+}
+
+<div class="tablo-kapsayici">
+    <table class="table admin-tablo">
+        <thead>
+            <tr>
+                <th>Uye</th>
+                <th>Egitmen</th>
+                <th>Ders</th>
+                <th>Talep Tarihi</th>
+                <th>Istenen Tarih</th>
+                <th>Not</th>
+                <th>Durum</th>
+                <th class="text-end">Islemler</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var talep in Model)
+        {
+            <tr>
+                <td>@talep.UyeAdi</td>
+                <td>@talep.EgitmenAdi</td>
+                <td>@talep.DersAdi</td>
+                <td>@talep.TalepTarihi.ToString("dd.MM.yyyy")</td>
+                <td>@talep.IstenenTarih.ToString("dd.MM.yyyy HH:mm")</td>
+                <td>@(string.IsNullOrWhiteSpace(talep.Not) ? "-" : talep.Not)</td>
+                <td><span class="durum">@talep.Durum</span></td>
+                <td class="text-end">
+                    @if (talep.Durum == "Bekliyor")
+                    {
+                        <form class="satir-form" asp-action="OzelDersTalebiOnayla" asp-route-id="@talep.Id" method="post">
+                            @Html.AntiForgeryToken()
+                            <button class="btn btn-sm btn-outline-success" type="submit">Onayla</button>
+                        </form>
+                        <form class="satir-form" asp-action="OzelDersTalebiReddet" asp-route-id="@talep.Id" method="post">
+                            @Html.AntiForgeryToken()
+                            <button class="btn btn-sm btn-outline-danger" type="submit">Reddet</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,69 @@
+@inject FitReserve.Services.JsonDataService JsonDataService
+@{
+    var okunmamisBildirimSayisi = JsonDataService.Listele<Bildirim>("bildirimler.json").Count(bildirim => !bildirim.OkunduMu);
+    var bekleyenEgitmenTalebiSayisi = JsonDataService.Listele<EgitmenKayitTalebi>("egitmenKayitTalepleri.json").Count(talep => talep.Durum == "Bekliyor");
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FitReserve Admin</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="admin-kapsayici">
+        <aside class="admin-menu">
+            <a class="admin-logo" asp-controller="Admin" asp-action="Dashboard">FitReserve</a>
+            <nav>
+                <a asp-controller="Admin" asp-action="Dashboard">Dashboard</a>
+                <a asp-controller="Admin" asp-action="Uyeler">Uyeler</a>
+                <a class="menu-bildirim-linki" asp-controller="Admin" asp-action="Egitmenler">
+                    <span>Egitmenler</span>
+                    @if (bekleyenEgitmenTalebiSayisi > 0)
+                    {
+                        <span class="bildirim-rozeti">@bekleyenEgitmenTalebiSayisi</span>
+                    }
+                </a>
+                <a asp-controller="Admin" asp-action="UyelikPaketleri">Uyelik Paketleri</a>
+                <a asp-controller="Admin" asp-action="Dersler">Dersler</a>
+                <a asp-controller="Admin" asp-action="OzelDersTalepleri">Ozel Ders Talepleri</a>
+                <a class="menu-bildirim-linki" asp-controller="Admin" asp-action="Bildirimler">
+                    <span>Bildirimler</span>
+                    @if (okunmamisBildirimSayisi > 0)
+                    {
+                        <span class="bildirim-rozeti">@okunmamisBildirimSayisi</span>
+                    }
+                </a>
+                <a class="cikis-linki" href="/Login">Cikis Yap</a>
+            </nav>
+        </aside>
+
+        <main class="admin-icerik">
+            <header class="admin-ust">
+                <h1>@ViewData["Title"]</h1>
+            </header>
+
+            @if (TempData["BasariMesaji"] is not null)
+            {
+                <div class="alert alert-success">@TempData["BasariMesaji"]</div>
+            }
+
+            @if (TempData["HataMesaji"] is not null)
+            {
+                <div class="alert alert-danger">@TempData["HataMesaji"]</div>
+            }
+
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

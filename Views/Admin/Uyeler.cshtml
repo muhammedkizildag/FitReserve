@@ -1,0 +1,43 @@
+@model List<Uye>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Uyeler";
+}
+
+<div class="tablo-kapsayici">
+    <table class="table admin-tablo">
+        <thead>
+            <tr>
+                <th>Ad Soyad</th>
+                <th>Eposta</th>
+                <th>Telefon</th>
+                <th>Paket</th>
+                <th>Kayit Tarihi</th>
+                <th>Durum</th>
+                <th class="text-end">Islemler</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var uye in Model)
+        {
+            <tr>
+                <td>@uye.AdSoyad</td>
+                <td>@uye.Eposta</td>
+                <td>@uye.Telefon</td>
+                <td>@uye.UyelikPaketiAdi</td>
+                <td>@uye.KayitTarihi.ToString("dd.MM.yyyy")</td>
+                <td><span class="durum @(uye.AktifMi ? "aktif" : "pasif")">@(uye.AktifMi ? "Aktif" : "Pasif")</span></td>
+                <td class="text-end">
+                    @if (uye.AktifMi)
+                    {
+                        <form class="satir-form" asp-action="UyeligiBitir" asp-route-id="@uye.Id" method="post">
+                            @Html.AntiForgeryToken()
+                            <button class="btn btn-sm btn-outline-danger" type="submit">Uyeligi Bitir</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

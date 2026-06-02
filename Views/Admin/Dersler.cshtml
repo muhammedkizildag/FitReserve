@@ -1,0 +1,134 @@
+@model AdminDerslerViewModel
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Dersler";
+}
+
+<div class="dersler-yerlesim">
+    <aside class="ders-listesi">
+        <h2>Grup Dersleri</h2>
+        @if (Model.GrupDersleri.Any())
+        {
+            <ul>
+                @foreach (var ders in Model.GrupDersleri)
+                {
+                    <li>
+                        <strong>@ders.Ad</strong>
+                        <span>@ders.EgitmenAdi</span>
+                        <span>@ders.SureDakika dakika</span>
+                        <a class="btn btn-sm btn-primary" asp-action="DersAc" asp-route-id="@ders.Id">Ders Ac</a>
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p class="bos-metin">Kayitli grup dersi yok.</p>
+        }
+    </aside>
+
+    <section class="haftalik-dersler">
+        <div class="hafta-basligi">
+            <span>Bu Hafta</span>
+            <strong>@Model.HaftaBaslangici.ToString("dd.MM.yyyy") - @Model.HaftaBitisi.ToString("dd.MM.yyyy")</strong>
+        </div>
+
+        <section class="ders-bolumu">
+            <h2>Gerceklesecek Grup Dersleri</h2>
+            @if (Model.HaftalikGrupDersleri.Any())
+            {
+                <div class="tablo-kapsayici">
+                    <table class="table admin-tablo">
+                        <thead>
+                            <tr>
+                                <th>Ders</th>
+                                <th>Egitmen</th>
+                                <th>Tarih</th>
+                                <th>Sure</th>
+                                <th>Katilim</th>
+                                <th class="text-end">Islemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var ders in Model.HaftalikGrupDersleri)
+                        {
+                            var dersBitisZamani = ders.BaslangicZamani.AddMinutes(ders.SureDakika);
+                            <tr>
+                                <td>@ders.DersAdi</td>
+                                <td>@ders.EgitmenAdi</td>
+                                <td>@ders.BaslangicZamani.ToString("dd.MM.yyyy HH:mm")</td>
+                                <td>@ders.SureDakika dakika</td>
+                                <td>@ders.KatilimciSayisi / @ders.Kapasite</td>
+                                <td class="text-end">
+                                    @if (DateTime.Now >= dersBitisZamani)
+                                    {
+                                        <span class="durum">Ders Tamamlandi</span>
+                                    }
+                                    else if (ders.BaslangicZamani <= DateTime.Now)
+                                    {
+                                        <span class="durum aktif">Ders Aktif</span>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-sm btn-outline-primary" asp-action="GrupDersiGuncelle" asp-route-id="@ders.Id">Guncelle</a>
+                                        <form class="satir-form" asp-action="GrupDersiIptalEt" asp-route-id="@ders.Id" method="post">
+                                            @Html.AntiForgeryToken()
+                                            <button class="btn btn-sm btn-outline-danger" type="submit">Iptal Et</button>
+                                        </form>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <p class="bos-metin">Bu hafta planlanmis grup dersi yok.</p>
+            }
+        </section>
+
+        <section class="ders-bolumu">
+            <h2>Gerceklesecek Ozel Dersler</h2>
+            @if (Model.HaftalikOzelDersler.Any())
+            {
+                <div class="tablo-kapsayici">
+                    <table class="table admin-tablo">
+                        <thead>
+                            <tr>
+                                <th>Ders</th>
+                                <th>Uye</th>
+                                <th>Egitmen</th>
+                                <th>Tarih</th>
+                                <th class="text-end">Islemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var talep in Model.HaftalikOzelDersler)
+                        {
+                            <tr>
+                                <td>@talep.DersAdi</td>
+                                <td>@talep.UyeAdi</td>
+                                <td>@talep.EgitmenAdi</td>
+                                <td>@talep.IstenenTarih.ToString("dd.MM.yyyy HH:mm")</td>
+                                <td class="text-end">
+                                    <a class="btn btn-sm btn-outline-primary" asp-action="OzelDersGuncelle" asp-route-id="@talep.Id">Guncelle</a>
+                                    <form class="satir-form" asp-action="OzelDersIptalEt" asp-route-id="@talep.Id" method="post">
+                                        @Html.AntiForgeryToken()
+                                        <button class="btn btn-sm btn-outline-danger" type="submit">Iptal Et</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <p class="bos-metin">Bu hafta onaylanmis ozel ders yok.</p>
+            }
+        </section>
+    </section>
+</div>

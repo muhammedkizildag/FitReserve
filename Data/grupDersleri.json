@@ -1,0 +1,32 @@
+[
+  {
+    "Id": 1,
+    "DersAdi": "Pilates",
+    "EgitmenAdi": "Selin Arslan",
+    "BaslangicZamani": "2026-05-28T18:00:00",
+    "SureDakika": 50,
+    "Kapasite": 12,
+    "KatilimciSayisi": 8,
+    "IptalMi": false
+  },
+  {
+    "Id": 2,
+    "DersAdi": "Cross Training",
+    "EgitmenAdi": "Taylan Ergin",
+    "BaslangicZamani": "2026-05-29T19:00:00",
+    "SureDakika": 50,
+    "Kapasite": 10,
+    "KatilimciSayisi": 6,
+    "IptalMi": false
+  },
+  {
+    "Id": 3,
+    "DersAdi": "Kardiyo ve Zumba",
+    "EgitmenAdi": "Ece Karahan",
+    "BaslangicZamani": "2026-05-31T21:00:00",
+    "SureDakika": 45,
+    "Kapasite": 10,
+    "KatilimciSayisi": 0,
+    "IptalMi": false
+  }
+]

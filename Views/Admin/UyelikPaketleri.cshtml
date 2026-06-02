@@ -1,0 +1,39 @@
+@model List<UyelikPaketi>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Uyelik Paketleri";
+}
+
+<div class="sayfa-araclari">
+    <a class="btn btn-primary" asp-action="UyelikPaketiEkle">Yeni Paket</a>
+</div>
+
+<div class="tablo-kapsayici">
+    <table class="table admin-tablo">
+        <thead>
+            <tr>
+                <th>Ad</th>
+                <th>Aciklama</th>
+                <th>Sure</th>
+                <th>Fiyat</th>
+                <th>Durum</th>
+                <th class="text-end">Islemler</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var paket in Model)
+        {
+            <tr>
+                <td>@paket.Ad</td>
+                <td>@paket.Aciklama</td>
+                <td>@paket.SureGun gun</td>
+                <td>@paket.Fiyat.ToString("C")</td>
+                <td><span class="durum @(paket.AktifMi ? "aktif" : "pasif")">@(paket.AktifMi ? "Aktif" : "Pasif")</span></td>
+                <td class="text-end">
+                    <a class="btn btn-sm btn-outline-primary" asp-action="UyelikPaketiGuncelle" asp-route-id="@paket.Id">Guncelle</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

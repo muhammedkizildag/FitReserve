@@ -1,0 +1,60 @@
+@model List<UyelikPaketi>
+@{
+    Layout = "_UyeLayout";
+    ViewData["Title"] = "Üyelik Paketleri";
+    var aktifPaket = ViewData["AktifPaket"] as string;
+}
+
+<div class="card-glass">
+    <h3>💎 Üyelik Paketini Yönet</h3>
+    <p class="text-secondary">Aşağıda spor salonumuzun sunduğu üyelik paketlerini inceleyebilirsiniz. İhtiyaçlarınıza en uygun paketi seçerek hemen aktif edebilirsiniz.</p>
+</div>
+
+<div class="paket-grid">
+    @foreach (var paket in Model)
+    {
+        var isCurrent = string.Equals(paket.Ad, aktifPaket, StringComparison.OrdinalIgnoreCase);
+        <div class="paket-karti @(isCurrent ? "aktif-paket" : "")">
+            <h4>@paket.Ad</h4>
+            
+            <div class="paket-fiyat">
+                @paket.Fiyat.ToString("C0")
+                <span>/ @paket.SureGun Gün</span>
+            </div>
+
+            <p class="paket-aciklama">@paket.Aciklama</p>
+
+            <ul class="paket-ozellikler">
+                <li>Salon Donanım Kullanımı</li>
+                @if (paket.Ad.Contains("Standart"))
+                {
+                    <li class="text-muted">Toplu Sınıf Dersleri (Ekstra Ücretli)</li>
+                    <li class="text-muted">1e1 Özel Dersler (Ekstra Ücretli)</li>
+                }
+                else if (paket.Ad.Contains("Plus"))
+                {
+                    <li>Grup Derslerine Ücretsiz Katılım</li>
+                    <li class="text-muted">1e1 Özel Dersler (Ekstra Ücretli)</li>
+                }
+                else
+                {
+                    <li>Tüm Grup Derslerine Katılım</li>
+                    <li>1e1 Özel Derslerde Öncelik</li>
+                    <li>Ekstra Ücretsiz Ölçüm & Analizler</li>
+                }
+            </ul>
+
+            @if (isCurrent)
+            {
+                <button type="button" class="btn btn-outline-light w-100" disabled>Mevcut Paketiniz</button>
+            }
+            else
+            {
+                <form asp-action="PaketSec" asp-route-id="@paket.Id" method="post">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn-custom w-100">Bu Pakete Geç</button>
+                </form>
+            }
+        </div>
+    }
+</div>

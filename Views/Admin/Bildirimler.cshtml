@@ -1,0 +1,27 @@
+@model List<Bildirim>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Bildirimler";
+}
+
+<div class="tablo-kapsayici">
+    <table class="table admin-tablo">
+        <thead>
+            <tr>
+                <th>Baslik</th>
+                <th>Mesaj</th>
+                <th>Gonderim Tarihi</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var bildirim in Model)
+        {
+            <tr>
+                <td>@bildirim.Baslik</td>
+                <td>@bildirim.Mesaj</td>
+                <td>@bildirim.GonderimTarihi.ToString("dd.MM.yyyy HH:mm")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,25 @@
+@model AdminDashboardViewModel
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Dashboard";
+}
+
+<section class="dashboard-hero">
+    <div class="dashboard-marka">
+        <span class="fitreserve-logo" aria-hidden="true">
+            <span></span>
+        </span>
+        <strong>FITRESERVE</strong>
+    </div>
+</section>
+
+<section class="dashboard-ozet-grid">
+    <div class="istatistik-karti">
+        <span>Aktif Uye</span>
+        <strong>@Model.AktifUyeSayisi</strong>
+    </div>
+    <div class="istatistik-karti">
+        <span>Aktif Egitmen</span>
+        <strong>@Model.AktifEgitmenSayisi</strong>
+    </div>
+</section>

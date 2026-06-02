@@ -1,0 +1,37 @@
+@model DersAcFormViewModel
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Ders Ac";
+}
+
+<form method="post" class="admin-form">
+    @Html.AntiForgeryToken()
+    <input asp-for="DersId" type="hidden" />
+    <input asp-for="DersAdi" type="hidden" />
+    <input asp-for="EgitmenAdi" type="hidden" />
+
+    <div class="form-ozet">
+        <strong>@Model.DersAdi</strong>
+        <span>@Model.EgitmenAdi</span>
+    </div>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label asp-for="BaslangicZamani" class="form-label">Tarih ve Saat</label>
+            <input asp-for="BaslangicZamani" type="datetime-local" class="form-control" />
+            <span asp-validation-for="BaslangicZamani" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Kapasite" class="form-label">Kontenjan</label>
+            <input asp-for="Kapasite" class="form-control" />
+            <span asp-validation-for="Kapasite" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-islemleri">
+        <button class="btn btn-primary" type="submit">Dersi Ac</button>
+        <a class="btn btn-outline-secondary" asp-action="Dersler">Vazgec</a>
+    </div>
+</form>

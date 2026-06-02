@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FitReserve Üye Paneli</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/uye.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body class="uye-body">
+    <div class="uye-kapsayici">
+        <!-- Sidebar Navigation -->
+        <aside class="uye-sidebar">
+            <div class="sidebar-marka">
+                <h2>FitReserve</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a class="nav-link-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "Dashboard" ? "aktif" : "")" 
+                   asp-controller="Uye" asp-action="Dashboard">
+                    <span class="ikon">📊</span> Dashboard
+                </a>
+                <a class="nav-link-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "GrupDersleri" ? "aktif" : "")" 
+                   asp-controller="Uye" asp-action="GrupDersleri">
+                    <span class="ikon">🗓️</span> Grup Dersleri
+                </a>
+                <a class="nav-link-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "OzelDersTalepleri" ? "aktif" : "")" 
+                   asp-controller="Uye" asp-action="OzelDersTalepleri">
+                    <span class="ikon">💪</span> 1e1 Özel Ders
+                </a>
+                <a class="nav-link-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "Paketler" ? "aktif" : "")" 
+                   asp-controller="Uye" asp-action="Paketler">
+                    <span class="ikon">💎</span> Üyelik Paketleri
+                </a>
+                <a class="nav-link-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "Bildirimler" ? "aktif" : "")" 
+                   asp-controller="Uye" asp-action="Bildirimler">
+                    <span class="ikon">🔔</span> Bildirimlerim
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="kullanici-bilgi">
+                    <div class="avatar">👤</div>
+                    <div class="detay">
+                        <p class="ad">@ViewData["UyeAd"]</p>
+                        <span class="rol">Üye</span>
+                    </div>
+                </div>
+                <a class="cikis-butonu" asp-controller="Uye" asp-action="Cikis">🚪 Çıkış Yap</a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="uye-icerik">
+            <header class="icerik-ust-bar">
+                <h1 class="sayfa-basligi">@ViewData["Title"]</h1>
+                <div class="tarih-bar">📅 @DateTime.Now.ToString("dd MMMM yyyy, dddd")</div>
+            </header>
+
+            <div class="icerik-alan">
+                @if (TempData["BasariMesaji"] is not null)
+                {
+                    <div class="alert alert-glass alert-success alert-dismissible fade show" role="alert">
+                        <strong>Başarılı!</strong> @TempData["BasariMesaji"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Kapat"></button>
+                    </div>
+                }
+
+                @if (TempData["HataMesaji"] is not null)
+                {
+                    <div class="alert alert-glass alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Hata!</strong> @TempData["HataMesaji"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Kapat"></button>
+                    </div>
+                }
+
+                @RenderBody()
+            </div>
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
