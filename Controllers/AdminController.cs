@@ -2,6 +2,7 @@ using FitReserve.Models;
 using FitReserve.Services;
 using FitReserve.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace FitReserve.Controllers;
 
@@ -21,6 +22,24 @@ public class AdminController : BaseController
     public AdminController(JsonDataService jsonDataService)
     {
         _jsonDataService = jsonDataService;
+    }
+
+    public override void OnActionExecuting(ActionExecutingContext context)
+    {
+        // Login action'ı hariç tutulmalıdır ama AdminController'da login action'ı yok, hepsi yetkili olmalı!
+        if (!context.HttpContext.Request.Cookies.ContainsKey("AdminEposta"))
+        {
+            TempData["HataMesaji"] = "Lütfen önce giriş yapınız.";
+            context.Result = RedirectToAction("Index", "Login");
+        }
+        base.OnActionExecuting(context);
+    }
+
+    public IActionResult Cikis()
+    {
+        Response.Cookies.Delete("AdminEposta");
+        BasariMesaji("Başarıyla çıkış yapıldı.");
+        return RedirectToAction("Index", "Login");
     }
 
     public IActionResult Dashboard()
@@ -548,6 +567,15 @@ public class AdminController : BaseController
         if (talep is null)
         {
             return NotFound();
+        }
+
+        if (yeniDurum == "Onaylandi")
+        {
+            if (_jsonDataService.DersZamaniCakismasiVarMi(talep.IstenenTarih, 50, talep.EgitmenAdi, talep.Id))
+            {
+                HataMesaji("Çakışma Hatası: Belirtilen tarihte eğitmenin başka bir dersi bulunmaktadır!");
+                return RedirectToAction(nameof(OzelDersTalepleri));
+            }
         }
 
         talep.Durum = yeniDurum;

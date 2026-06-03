@@ -1,0 +1,61 @@
+@model UyeProfilViewModel
+@{
+    Layout = "_UyeLayout";
+    ViewData["Title"] = "Profil Bilgilerim";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card-glass">
+            <h3>👤 Profil Bilgilerini Güncelle</h3>
+            <p class="text-muted">Aşağıdaki alanları düzenleyerek profilinizi güncel tutabilirsiniz.</p>
+
+            <form asp-action="Profil" method="post" class="mt-4">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="Id" />
+
+                <div class="row">
+                    <!-- Ad Soyad -->
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="AdSoyad" class="form-label">Ad Soyad</label>
+                        <input asp-for="AdSoyad" class="form-control form-glass" placeholder="Adınız ve Soyadınız" />
+                        <span asp-validation-for="AdSoyad" class="text-danger" style="font-size: 12px;"></span>
+                    </div>
+
+                    <!-- Telefon -->
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Telefon" class="form-label">Telefon Numarası</label>
+                        <input asp-for="Telefon" class="form-control form-glass" placeholder="05xx xxx xx xx" />
+                        <span asp-validation-for="Telefon" class="text-danger" style="font-size: 12px;"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- E-posta -->
+                    <div class="col-md-12 mb-3">
+                        <label asp-for="Eposta" class="form-label">E-posta Adresi</label>
+                        <input asp-for="Eposta" type="email" class="form-control form-glass" placeholder="eposta@adresiniz.com" />
+                        <span asp-validation-for="Eposta" class="text-danger" style="font-size: 12px;"></span>
+                    </div>
+                </div>
+
+                <hr class="my-4" style="border-color: var(--border-color);" />
+
+                <!-- Şifre Değiştir -->
+                <div class="mb-4">
+                    <label asp-for="Sifre" class="form-label">Yeni Şifre</label>
+                    <input asp-for="Sifre" type="password" class="form-control form-glass" placeholder="Şifrenizi değiştirmek istemiyorsanız boş bırakın" />
+                    <span asp-validation-for="Sifre" class="text-danger" style="font-size: 12px;"></span>
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn-custom">💾 Değişiklikleri Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

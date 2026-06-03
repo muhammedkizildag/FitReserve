@@ -1,0 +1,129 @@
+@model EgitmenDashboardViewModel
+@{
+    Layout = "_EgitmenLayout";
+    ViewData["Title"] = "Dashboard";
+}
+
+<!-- İstatistik Kartları Grid -->
+<div class="card-glass mb-4">
+    <h3>📊 Panel İstatistikleri</h3>
+    <div class="istatistik-kutusu">
+        <div class="istatistik-ogesi">
+            <span>Bugünkü Dersler</span>
+            <p>@Model.BugunkuDersSayisi</p>
+        </div>
+        <div class="istatistik-ogesi">
+            <span>Bekleyen Özel Dersler</span>
+            <p>@Model.BekleyenOzelDersSayisi</p>
+        </div>
+        <div class="istatistik-ogesi">
+            <span>Toplam Gelecek Katılımcı</span>
+            <p>@Model.ToplamKatilimciSayisi</p>
+        </div>
+        <div class="istatistik-ogesi">
+            <span>Okunmamış Bildirimler</span>
+            <p>@Model.OkunmamisBildirimSayisi</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Yaklaşan Grup Dersleri -->
+    <div class="col-lg-6">
+        <div class="card-glass">
+            <h3>🗓️ Yaklaşan Grup Dersleriniz</h3>
+            @if (Model.GelecekDersler.Any())
+            {
+                <div class="ders-listesi">
+                    @foreach (var ders in Model.GelecekDersler)
+                    {
+                        <div class="ders-karti">
+                            <div class="sol-bolum">
+                                <h4>@ders.DersAdi</h4>
+                                <div class="bilgiler">
+                                    <span>🕒 @ders.BaslangicZamani.ToString("dd.MM.yyyy HH:mm")</span>
+                                    <span>⏳ @ders.SureDakika dk</span>
+                                </div>
+                            </div>
+                            <div class="sag-bolum">
+                                <div class="kontenjan-metni">Doluluk: @ders.KatilimciSayisi / @ders.Kapasite</div>
+                                <div class="kontenjan-bar">
+                                    <div class="kontenjan-doluluk" style="width: @((double)ders.KatilimciSayisi / ders.Kapasite * 100)%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="mt-3 text-end">
+                    <a class="btn-custom" asp-action="GrupDersleri">Tüm Grup Dersleri ➔</a>
+                </div>
+            }
+            else
+            {
+                <p class="text-muted">Yaklaşan grup dersiniz bulunmamaktadır.</p>
+            }
+        </div>
+    </div>
+
+    <!-- Yaklaşan Özel Dersler -->
+    <div class="col-lg-6">
+        <div class="card-glass">
+            <h3>💪 Onaylı Özel Dersleriniz</h3>
+            @if (Model.GelecekOzelDersler.Any())
+            {
+                <div class="ders-listesi">
+                    @foreach (var talep in Model.GelecekOzelDersler)
+                    {
+                        <div class="ders-karti">
+                            <div class="sol-bolum">
+                                <h4>@talep.DersAdi</h4>
+                                <span class="text-light">👤 Üye: @talep.UyeAdi</span>
+                                <div class="bilgiler">
+                                    <span>🕒 @talep.IstenenTarih.ToString("dd.MM.yyyy HH:mm")</span>
+                                </div>
+                            </div>
+                            <div class="sag-bolum">
+                                <span class="status-badge onaylandi">Onaylandı</span>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="mt-3 text-end">
+                    <a class="btn-custom" asp-action="OzelDersleri">Tüm Özel Ders Talepleri ➔</a>
+                </div>
+            }
+            else
+            {
+                <p class="text-muted">Yakın zamanda planlanmış onaylı özel dersiniz bulunmamaktadır.</p>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Son Bildirimler -->
+<div class="card-glass mt-4">
+    <h3>🔔 Son Bildirimler</h3>
+    @if (Model.Bildirimler.Any())
+    {
+        <div class="bildirim-listesi">
+            @foreach (var bildirim in Model.Bildirimler)
+            {
+                <div class="bildirim-karti @(!bildirim.OkunduMu ? "okunmadi" : "")">
+                    <div class="ikon-yeri">💬</div>
+                    <div class="detay">
+                        <h4>@bildirim.Baslik</h4>
+                        <p class="mb-1">@bildirim.Mesaj</p>
+                        <span class="tarih">🕒 @bildirim.GonderimTarihi.ToString("dd.MM.yyyy HH:mm")</span>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="mt-3 text-end">
+            <a class="btn-custom" asp-action="Bildirimler">Tüm Bildirimler ➔</a>
+        </div>
+    }
+    else
+    {
+        <p class="text-muted">Herhangi bir bildiriminiz bulunmamaktadır.</p>
+    }
+</div>

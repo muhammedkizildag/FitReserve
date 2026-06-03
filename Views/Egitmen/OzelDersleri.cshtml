@@ -1,0 +1,179 @@
+@model List<OzelDersTalebi>
+@{
+    Layout = "_EgitmenLayout";
+    ViewData["Title"] = "Özel Derslerim";
+    
+    var bekleyenler = Model.Where(t => t.Durum == "Bekliyor").ToList();
+    var onaylananlar = Model.Where(t => t.Durum == "Onaylandi").ToList();
+}
+
+<div class="card-glass">
+    <h3>💪 1-on-1 Özel Ders Talepleri</h3>
+    <p class="text-muted">Üyeler tarafından sizinle yapılması istenen bire bir özel ders taleplerini bu sayfadan yönetebilirsiniz.</p>
+
+    <!-- Sekmeler -->
+    <ul class="nav nav-pills tab-menu mb-4" id="ozelDersTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="tab-butonu active" id="bekleyen-tab" data-bs-toggle="pill" data-bs-target="#bekleyen" type="button" role="tab" aria-controls="bekleyen" aria-selected="true">
+                ⏳ Bekleyen Talepler (@bekleyenler.Count)
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="tab-butonu" id="onaylanan-tab" data-bs-toggle="pill" data-bs-target="#onaylanan" type="button" role="tab" aria-controls="onaylanan" aria-selected="false">
+                ✅ Onaylananlar (@onaylananlar.Count)
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="tab-butonu" id="tumu-tab" data-bs-toggle="pill" data-bs-target="#tumu" type="button" role="tab" aria-controls="tumu" aria-selected="false">
+                📋 Tüm Talepler (@Model.Count)
+            </button>
+        </li>
+    </ul>
+
+    <!-- Sekme İçerikleri -->
+    <div class="tab-content" id="ozelDersTabsContent">
+        
+        <!-- Bekleyen Talepler Sekmesi -->
+        <div class="tab-pane fade show active" id="bekleyen" role="tabpanel" aria-labelledby="bekleyen-tab">
+            @if (bekleyenler.Any())
+            {
+                <div class="ders-listesi">
+                    @foreach (var talep in bekleyenler)
+                    {
+                        <div class="ders-karti">
+                            <div class="sol-bolum">
+                                <h4>@talep.DersAdi</h4>
+                                <span class="text-light">👤 Talep Eden Üye: <strong>@talep.UyeAdi</strong></span>
+                                <div class="bilgiler mt-1">
+                                    <span>📅 Tarih: @talep.IstenenTarih.ToString("dd.MM.yyyy, dddd")</span>
+                                    <span>🕒 Saat: @talep.IstenenTarih.ToString("HH:mm")</span>
+                                </div>
+                                @if (!string.IsNullOrWhiteSpace(talep.Not))
+                                {
+                                    <div class="mt-2 text-muted" style="font-size: 13px; background: rgba(255,255,255,0.02); padding: 8px 12px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                                        📝 Not: @talep.Not
+                                    </div>
+                                }
+                            </div>
+                            <div class="sag-bolum">
+                                <div class="d-flex align-items-center gap-2">
+                                    <form asp-action="OzelDersTalepOnayla" method="post" class="m-0">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@talep.Id" />
+                                        <button type="submit" class="btn-custom">✔️ Onayla</button>
+                                    </form>
+                                    <form asp-action="OzelDersTalepReddet" method="post" class="m-0">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@talep.Id" />
+                                        <button type="submit" class="btn-custom-danger">❌ Reddet</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-muted text-center py-4">Bekleyen herhangi bir özel ders talebi bulunmamaktadır.</p>
+            }
+        </div>
+
+        <!-- Onaylanan Talepler Sekmesi -->
+        <div class="tab-pane fade" id="onaylanan" role="tabpanel" aria-labelledby="onaylanan-tab">
+            @if (onaylananlar.Any())
+            {
+                <div class="ders-listesi">
+                    @foreach (var talep in onaylananlar)
+                    {
+                        var gecmisMi = talep.IstenenTarih < DateTime.Now;
+                        <div class="ders-karti">
+                            <div class="sol-bolum">
+                                <h4>@talep.DersAdi</h4>
+                                <span class="text-light">👤 Üye: <strong>@talep.UyeAdi</strong></span>
+                                <div class="bilgiler mt-1">
+                                    <span>📅 Tarih: @talep.IstenenTarih.ToString("dd.MM.yyyy, dddd")</span>
+                                    <span>🕒 Saat: @talep.IstenenTarih.ToString("HH:mm")</span>
+                                </div>
+                                @if (!string.IsNullOrWhiteSpace(talep.Not))
+                                {
+                                    <div class="mt-2 text-muted" style="font-size: 13px;">
+                                        📝 Not: @talep.Not
+                                    </div>
+                                }
+                            </div>
+                            <div class="sag-bolum">
+                                @if (gecmisMi)
+                                {
+                                    <span class="status-badge iptal-edildi">Tamamlandı</span>
+                                }
+                                else
+                                {
+                                    <span class="status-badge onaylandi">Gelecek Ders</span>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-muted text-center py-4">Onaylanmış özel dersiniz bulunmamaktadır.</p>
+            }
+        </div>
+
+        <!-- Tüm Talepler Sekmesi -->
+        <div class="tab-pane fade" id="tumu" role="tabpanel" aria-labelledby="tumu-tab">
+            @if (Model.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-glass">
+                        <thead>
+                            <tr>
+                                <th>Ders Adı</th>
+                                <th>Üye</th>
+                                <th>Ders Zamanı</th>
+                                <th>Talep Tarihi</th>
+                                <th>Durum</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var talep in Model)
+                            {
+                                <tr>
+                                    <td><strong>@talep.DersAdi</strong></td>
+                                    <td>@talep.UyeAdi</td>
+                                    <td>@talep.IstenenTarih.ToString("dd.MM.yyyy HH:mm")</td>
+                                    <td>@talep.TalepTarihi.ToString("dd.MM.yyyy HH:mm")</td>
+                                    <td>
+                                        @if (talep.Durum == "Bekliyor")
+                                        {
+                                            <span class="status-badge bekliyor">Bekliyor</span>
+                                        }
+                                        else if (talep.Durum == "Onaylandi")
+                                        {
+                                            <span class="status-badge onaylandi">Onaylandı</span>
+                                        }
+                                        else if (talep.Durum == "Reddedildi")
+                                        {
+                                            <span class="status-badge reddedildi">Reddedildi</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="status-badge iptal-edildi">@talep.Durum</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <p class="text-muted text-center py-4">Herhangi bir özel ders kaydı bulunmamaktadır.</p>
+            }
+        </div>
+
+    </div>
+</div>

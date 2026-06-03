@@ -7,6 +7,7 @@ using FitReserve.Services;
 using FitReserve.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace FitReserve.Controllers;
 
@@ -26,6 +27,16 @@ public class UyeController : BaseController
     public UyeController(JsonDataService jsonDataService)
     {
         _jsonDataService = jsonDataService;
+    }
+
+    public override void OnActionExecuting(ActionExecutingContext context)
+    {
+        if (!context.HttpContext.Request.Cookies.ContainsKey("UyeId"))
+        {
+            TempData["HataMesaji"] = "Lütfen önce giriş yapınız.";
+            context.Result = RedirectToAction("Index", "Login");
+        }
+        base.OnActionExecuting(context);
     }
 
     private Uye? AktifUyeGetir()
@@ -333,6 +344,12 @@ public class UyeController : BaseController
             return RedirectToAction(nameof(OzelDersTalepleri));
         }
 
+        if (_jsonDataService.DersZamaniCakismasiVarMi(istenenTarih, 50, egitmenAdi))
+        {
+            HataMesaji("Seçilen tarih ve saatte eğitmenin başka bir dersi bulunmaktadır. Lütfen farklı bir saat seçiniz.");
+            return RedirectToAction(nameof(OzelDersTalepleri));
+        }
+
         var talepler = _jsonDataService.Listele<OzelDersTalebi>(OzelDersTalepleriDosyasi);
         int yeniId = talepler.Any() ? talepler.Max(t => t.Id) + 1 : 1;
 
@@ -402,6 +419,87 @@ public class UyeController : BaseController
 
         ViewData["UyeAd"] = uye.AdSoyad;
         return View(uyeBildirimler);
+    }
+
+    public IActionResult Profil()
+    {
+        var uye = AktifUyeGetir();
+        if (uye is null)
+        {
+            return RedirectToAction("Index", "Login");
+        }
+
+        var model = new UyeProfilViewModel
+        {
+            Id = uye.Id,
+            AdSoyad = uye.AdSoyad,
+            Eposta = uye.Eposta,
+            Telefon = uye.Telefon
+        };
+
+        ViewData["UyeAd"] = uye.AdSoyad;
+        return View(model);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Profil(UyeProfilViewModel model)
+    {
+        var uye = AktifUyeGetir();
+        if (uye is null)
+        {
+            return RedirectToAction("Index", "Login");
+        }
+
+        if (!ModelState.IsValid)
+        {
+            ViewData["UyeAd"] = uye.AdSoyad;
+            return View(model);
+        }
+
+        var uyeler = _jsonDataService.Listele<Uye>(UyelerDosyasi);
+        var guncellenecek = uyeler.FirstOrDefault(u => u.Id == uye.Id);
+
+        if (guncellenecek is null)
+        {
+            HataMesaji("Uye bulunamadi.");
+            return RedirectToAction(nameof(Dashboard));
+        }
+
+        if (uyeler.Any(u => u.Eposta.Equals(model.Eposta, StringComparison.OrdinalIgnoreCase) && u.Id != uye.Id))
+        {
+            HataMesaji("Bu e-posta adresi baska bir uye tarafindan kullaniliyor.");
+            ViewData["UyeAd"] = uye.AdSoyad;
+            return View(model);
+        }
+
+        string eskiAd = guncellenecek.AdSoyad;
+        guncellenecek.AdSoyad = model.AdSoyad;
+        guncellenecek.Eposta = model.Eposta;
+        guncellenecek.Telefon = model.Telefon;
+
+        if (!string.IsNullOrWhiteSpace(model.Sifre))
+        {
+            guncellenecek.Sifre = model.Sifre;
+        }
+
+        _jsonDataService.Kaydet(UyelerDosyasi, uyeler);
+
+        // Ad değiştiyse çerezi ve özel ders taleplerindeki üye adını da güncelle!
+        if (!eskiAd.Equals(model.AdSoyad, StringComparison.OrdinalIgnoreCase))
+        {
+            var talepler = _jsonDataService.Listele<OzelDersTalebi>(OzelDersTalepleriDosyasi);
+            foreach (var talep in talepler.Where(t => t.UyeAdi.Equals(eskiAd, StringComparison.OrdinalIgnoreCase)))
+            {
+                talep.UyeAdi = model.AdSoyad;
+            }
+            _jsonDataService.Kaydet(OzelDersTalepleriDosyasi, talepler);
+
+            Response.Cookies.Append("UyeAd", model.AdSoyad, new CookieOptions { HttpOnly = true, Expires = DateTimeOffset.UtcNow.AddDays(1) });
+        }
+
+        BasariMesaji("Profil bilgileriniz basariyla guncellendi.");
+        return RedirectToAction(nameof(Profil));
     }
 
     public IActionResult Cikis()

@@ -8,4 +8,5 @@ public class Bildirim
     public DateTime GonderimTarihi { get; set; }
     public bool OkunduMu { get; set; }
     public int? AliciUyeId { get; set; }
+    public int? AliciEgitmenId { get; set; }
 }

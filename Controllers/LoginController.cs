@@ -51,6 +51,9 @@ public class LoginController : BaseController
                 return RedirectToAction(nameof(Index));
             }
 
+            Response.Cookies.Append("AdminEposta", model.Giris.Eposta, new CookieOptions { HttpOnly = true, Expires = DateTimeOffset.UtcNow.AddDays(1) });
+
+            BasariMesaji("Admin girişi başarılı.");
             return RedirectToAction("Dashboard", "Admin");
         }
 
@@ -74,17 +77,22 @@ public class LoginController : BaseController
 
         if (model.Giris.Rol == Roller.Egitmen)
         {
-            var egitmenVarMi = _jsonDataService.Listele<Egitmen>(EgitmenlerDosyasi)
-                .Any(egitmen => egitmen.AktifMi && egitmen.Eposta == model.Giris.Eposta && egitmen.Sifre == model.Giris.Sifre);
+            var egitmen = _jsonDataService.Listele<Egitmen>(EgitmenlerDosyasi)
+                .FirstOrDefault(e => e.AktifMi && e.Eposta == model.Giris.Eposta && e.Sifre == model.Giris.Sifre);
 
-            if (!egitmenVarMi)
+            if (egitmen is null)
             {
                 HataMesaji("Egitmen bilgileri hatali.");
                 return RedirectToAction(nameof(Index));
             }
+
+            Response.Cookies.Append("EgitmenId", egitmen.Id.ToString(), new CookieOptions { HttpOnly = true, Expires = DateTimeOffset.UtcNow.AddDays(1) });
+            Response.Cookies.Append("EgitmenAd", egitmen.AdSoyad, new CookieOptions { HttpOnly = true, Expires = DateTimeOffset.UtcNow.AddDays(1) });
+
+            BasariMesaji("Egitmen girisi basarili.");
+            return RedirectToAction("Dashboard", "Egitmen");
         }
 
-        BasariMesaji($"{model.Giris.Rol} girisi basarili. Panel sayfasi hazirlaninca buradan yonlendirilecek.");
         return RedirectToAction(nameof(Index));
     }
 

@@ -1,66 +1,84 @@
+@inject FitReserve.Services.JsonDataService JsonDataService
+@{
+    int? egitmenId = null;
+    if (Context.Request.Cookies.TryGetValue("EgitmenId", out var idStr) && int.TryParse(idStr, out var id))
+    {
+        egitmenId = id;
+    }
+    
+    var okunmamisBildirimSayisi = 0;
+    if (egitmenId.HasValue)
+    {
+        okunmamisBildirimSayisi = JsonDataService.Listele<Bildirim>("bildirimler.json")
+            .Count(b => b.AliciEgitmenId == egitmenId && !b.OkunduMu);
+    }
+    
+    var egitmenAd = Context.Request.Cookies["EgitmenAd"] ?? "Eğitmen";
+}
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - FitReserve Üye Paneli</title>
+    <title>@ViewData["Title"] - FitReserve Eğitmen Paneli</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/uye.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/egitmen.css" asp-append-version="true" />
     @await RenderSectionAsync("Styles", required: false)
 </head>
-<body class="uye-body">
-    <div class="uye-kapsayici">
+<body class="egitmen-body">
+    <div class="egitmen-kapsayici">
         <!-- Sidebar Navigation -->
-        <aside class="uye-sidebar">
+        <aside class="egitmen-sidebar">
             <div class="sidebar-marka">
+                <div class="logo-ikon"></div>
                 <h2>FitReserve</h2>
             </div>
             
             <nav class="sidebar-nav">
                 <a class="nav-link-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "Dashboard" ? "aktif" : "")" 
-                   asp-controller="Uye" asp-action="Dashboard">
+                   asp-controller="Egitmen" asp-action="Dashboard">
                     <span class="ikon">📊</span> Dashboard
                 </a>
                 <a class="nav-link-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "GrupDersleri" ? "aktif" : "")" 
-                   asp-controller="Uye" asp-action="GrupDersleri">
-                    <span class="ikon">🗓️</span> Grup Dersleri
+                   asp-controller="Egitmen" asp-action="GrupDersleri">
+                    <span class="ikon">🗓️</span> Grup Derslerim
                 </a>
-                <a class="nav-link-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "OzelDersTalepleri" ? "aktif" : "")" 
-                   asp-controller="Uye" asp-action="OzelDersTalepleri">
-                    <span class="ikon">💪</span> 1e1 Özel Ders
-                </a>
-                <a class="nav-link-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "Paketler" ? "aktif" : "")" 
-                   asp-controller="Uye" asp-action="Paketler">
-                    <span class="ikon">💎</span> Üyelik Paketleri
-                </a>
-                <a class="nav-link-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "Bildirimler" ? "aktif" : "")" 
-                   asp-controller="Uye" asp-action="Bildirimler">
-                    <span class="ikon">🔔</span> Bildirimlerim
+                <a class="nav-link-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "OzelDersleri" ? "aktif" : "")" 
+                   asp-controller="Egitmen" asp-action="OzelDersleri">
+                    <span class="ikon">💪</span> Özel Derslerim
                 </a>
                 <a class="nav-link-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "Profil" ? "aktif" : "")" 
-                   asp-controller="Uye" asp-action="Profil">
+                   asp-controller="Egitmen" asp-action="Profil">
                     <span class="ikon">👤</span> Profilim
+                </a>
+                <a class="nav-link-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "Bildirimler" ? "aktif" : "")" 
+                   asp-controller="Egitmen" asp-action="Bildirimler">
+                    <span class="ikon">🔔</span> Bildirimlerim
+                    @if (okunmamisBildirimSayisi > 0)
+                    {
+                        <span class="badge rounded-pill bg-danger ms-auto">@okunmamisBildirimSayisi</span>
+                    }
                 </a>
             </nav>
 
             <div class="sidebar-footer">
                 <div class="kullanici-bilgi">
-                    <div class="avatar">👤</div>
+                    <div class="avatar">🥋</div>
                     <div class="detay">
-                        <p class="ad">@ViewData["UyeAd"]</p>
-                        <span class="rol">Üye</span>
+                        <p class="ad">@egitmenAd</p>
+                        <span class="rol">Eğitmen</span>
                     </div>
                 </div>
-                <a class="cikis-butonu" asp-controller="Uye" asp-action="Cikis">🚪 Çıkış Yap</a>
+                <a class="cikis-butonu" asp-controller="Egitmen" asp-action="Cikis">🚪 Çıkış Yap</a>
             </div>
         </aside>
 
         <!-- Main Content Area -->
-        <main class="uye-icerik">
+        <main class="egitmen-icerik">
             <header class="icerik-ust-bar">
                 <h1 class="sayfa-basligi">@ViewData["Title"]</h1>
                 <div class="tarih-bar">📅 @DateTime.Now.ToString("dd MMMM yyyy, dddd")</div>
