@@ -28,5 +28,115 @@
     "Kapasite": 10,
     "KatilimciSayisi": 0,
     "IptalMi": false
+  },
+  {
+    "Id": 4,
+    "DersAdi": "Cross Training",
+    "EgitmenAdi": "Taylan Ergin",
+    "BaslangicZamani": "2026-06-05T18:00:00",
+    "SureDakika": 50,
+    "Kapasite": 6,
+    "KatilimciSayisi": 1,
+    "IptalMi": false
+  },
+  {
+    "Id": 5,
+    "DersAdi": "Kardiyo ve Zumba",
+    "EgitmenAdi": "Ece Karahan",
+    "BaslangicZamani": "2026-06-05T10:00:00",
+    "SureDakika": 45,
+    "Kapasite": 8,
+    "KatilimciSayisi": 0,
+    "IptalMi": false
+  },
+  {
+    "Id": 6,
+    "DersAdi": "Nefes ve Esneklik",
+    "EgitmenAdi": "Mina Akbas",
+    "BaslangicZamani": "2026-06-05T09:00:00",
+    "SureDakika": 45,
+    "Kapasite": 8,
+    "KatilimciSayisi": 0,
+    "IptalMi": false
+  },
+  {
+    "Id": 7,
+    "DersAdi": "Pilates",
+    "EgitmenAdi": "Selin Arslan",
+    "BaslangicZamani": "2026-06-05T12:00:00",
+    "SureDakika": 50,
+    "Kapasite": 10,
+    "KatilimciSayisi": 0,
+    "IptalMi": false
+  },
+  {
+    "Id": 8,
+    "DersAdi": "Yoga",
+    "EgitmenAdi": "Mina Akbas",
+    "BaslangicZamani": "2026-06-05T11:00:00",
+    "SureDakika": 60,
+    "Kapasite": 8,
+    "KatilimciSayisi": 0,
+    "IptalMi": false
+  },
+  {
+    "Id": 9,
+    "DersAdi": "Spinning",
+    "EgitmenAdi": "Aylin Karahan",
+    "BaslangicZamani": "2026-06-06T14:00:00",
+    "SureDakika": 45,
+    "Kapasite": 12,
+    "KatilimciSayisi": 0,
+    "IptalMi": false
+  },
+  {
+    "Id": 10,
+    "DersAdi": "Boks",
+    "EgitmenAdi": "Bora Sancak",
+    "BaslangicZamani": "2026-06-07T18:00:00",
+    "SureDakika": 50,
+    "Kapasite": 4,
+    "KatilimciSayisi": 1,
+    "IptalMi": false
+  },
+  {
+    "Id": 11,
+    "DersAdi": "Cross Training",
+    "EgitmenAdi": "Taylan Ergin",
+    "BaslangicZamani": "2026-06-07T18:00:00",
+    "SureDakika": 50,
+    "Kapasite": 12,
+    "KatilimciSayisi": 0,
+    "IptalMi": false
+  },
+  {
+    "Id": 12,
+    "DersAdi": "Pilates",
+    "EgitmenAdi": "Selin Arslan",
+    "BaslangicZamani": "2026-06-07T20:00:00",
+    "SureDakika": 50,
+    "Kapasite": 8,
+    "KatilimciSayisi": 0,
+    "IptalMi": false
+  },
+  {
+    "Id": 13,
+    "DersAdi": "Yoga",
+    "EgitmenAdi": "Mina Akbas",
+    "BaslangicZamani": "2026-06-06T15:00:00",
+    "SureDakika": 60,
+    "Kapasite": 8,
+    "KatilimciSayisi": 0,
+    "IptalMi": false
+  },
+  {
+    "Id": 14,
+    "DersAdi": "Boks",
+    "EgitmenAdi": "Bora Sancak",
+    "BaslangicZamani": "2026-06-05T18:00:00",
+    "SureDakika": 50,
+    "Kapasite": 12,
+    "KatilimciSayisi": 0,
+    "IptalMi": false
   }
 ]

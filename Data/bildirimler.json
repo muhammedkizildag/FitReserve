@@ -4,34 +4,80 @@
     "Baslik": "Yeni ozel ders talebi",
     "Mesaj": "Ayse Demir yeni bir ozel ders talebi olusturdu.",
     "GonderimTarihi": "2026-05-27T10:05:00",
-    "OkunduMu": true
+    "OkunduMu": true,
+    "AliciUyeId": null,
+    "AliciEgitmenId": null
   },
   {
     "Id": 2,
     "Baslik": "Ders kapasitesi dolmak uzere",
     "Mesaj": "Pilates dersinde son 4 kontenjan kaldi.",
     "GonderimTarihi": "2026-05-27T17:15:00",
-    "OkunduMu": true
+    "OkunduMu": true,
+    "AliciUyeId": null,
+    "AliciEgitmenId": null
   },
   {
     "Id": 3,
     "Baslik": "Ders kapasitesi dolmak uzere",
     "Mesaj": "Fonksiyonel Antrenman dersinde son 4 kontenjan kaldi.",
     "GonderimTarihi": "2026-05-27T17:17:26",
-    "OkunduMu": true
+    "OkunduMu": true,
+    "AliciUyeId": null,
+    "AliciEgitmenId": null
   },
   {
     "Id": 4,
     "Baslik": "Yeni egitmen kayit talebi",
     "Mesaj": "Aylin Karan egitmen olarak kayit olmak istiyor.",
     "GonderimTarihi": "2026-05-28T13:20:00",
-    "OkunduMu": true
+    "OkunduMu": true,
+    "AliciUyeId": null,
+    "AliciEgitmenId": null
   },
   {
     "Id": 5,
     "Baslik": "Yeni egitmen kayit talebi",
     "Mesaj": "Doruk Sen egitmen olarak kayit olmak istiyor.",
     "GonderimTarihi": "2026-05-28T15:45:00",
-    "OkunduMu": true
+    "OkunduMu": true,
+    "AliciUyeId": null,
+    "AliciEgitmenId": null
+  },
+  {
+    "Id": 6,
+    "Baslik": "Grup Dersi Rezervasyonu",
+    "Mesaj": "\u0027Boks\u0027 dersine rezervasyonunuz basariyla yapildi. Baslangic: 07.06.2026 18:00",
+    "GonderimTarihi": "2026-06-04T19:58:26.4511851+00:00",
+    "OkunduMu": true,
+    "AliciUyeId": 1,
+    "AliciEgitmenId": null
+  },
+  {
+    "Id": 7,
+    "Baslik": "Grup Dersi Rezervasyonu",
+    "Mesaj": "\u0027Cross Training\u0027 dersine rezervasyonunuz basariyla yapildi. Baslangic: 05.06.2026 18:00",
+    "GonderimTarihi": "2026-06-04T19:59:18.4807227+00:00",
+    "OkunduMu": true,
+    "AliciUyeId": 1,
+    "AliciEgitmenId": null
+  },
+  {
+    "Id": 8,
+    "Baslik": "Yeni Ozel Ders Talebi",
+    "Mesaj": "Ayse Demir, Selin Arslan esliginde \u0027omurga sa\u011Fl\u0131\u011F\u0131n\u0131 desteklemek, v\u00FCcut fark\u0131ndal\u0131\u011F\u0131n\u0131 art\u0131rmak\u0027 ozel dersi talep etti. Tarih: 18.06.2026 23:02",
+    "GonderimTarihi": "2026-06-04T20:02:46.5341073+00:00",
+    "OkunduMu": true,
+    "AliciUyeId": null,
+    "AliciEgitmenId": null
+  },
+  {
+    "Id": 9,
+    "Baslik": "\u00D6zel Ders Talebi Onayland\u0131",
+    "Mesaj": "E\u011Fitmeniniz Selin Arslan, \u0027omurga sa\u011Fl\u0131\u011F\u0131n\u0131 desteklemek, v\u00FCcut fark\u0131ndal\u0131\u011F\u0131n\u0131 art\u0131rmak\u0027 \u00F6zel ders talebinizi onaylad\u0131. Tarih: 18.06.2026 23:02",
+    "GonderimTarihi": "2026-06-04T20:05:35.1637176+00:00",
+    "OkunduMu": true,
+    "AliciUyeId": 1,
+    "AliciEgitmenId": null
   }
 ]

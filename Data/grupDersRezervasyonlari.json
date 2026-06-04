@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "Id": 1,
+    "UyeId": 1,
+    "GrupDersiId": 10,
+    "RezervasyonTarihi": "2026-06-04T19:58:26.2318597+00:00"
+  },
+  {
+    "Id": 2,
+    "UyeId": 1,
+    "GrupDersiId": 4,
+    "RezervasyonTarihi": "2026-06-04T19:59:18.459104+00:00"
+  }
+]

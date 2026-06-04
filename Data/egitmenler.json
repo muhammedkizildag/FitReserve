@@ -4,62 +4,71 @@
     "AdSoyad": "Selin Arslan",
     "UzmanlikAlani": "Pilates",
     "Eposta": "selin.arslan@fitreserve.com",
+    "Sifre": "selinarslan",
     "Telefon": "0532 418 77 12",
-    "AktifMi": true,
-    "Sifre": "selinarslan"
+    "AktifMi": true
   },
   {
     "Id": 2,
     "AdSoyad": "Can Yilmaz",
     "UzmanlikAlani": "Kuvvet Antrenmani",
     "Eposta": "can.yilmaz@fitreserve.com",
+    "Sifre": "canyilmaz",
     "Telefon": "0541 906 35 48",
-    "AktifMi": true,
-    "Sifre": "canyilmaz"
+    "AktifMi": true
   },
   {
     "Id": 3,
     "AdSoyad": "Mina Akbas",
     "UzmanlikAlani": "Yoga",
     "Eposta": "mina.akbas@fitreserve.com",
+    "Sifre": "minaakbas",
     "Telefon": "0507 263 84 19",
-    "AktifMi": true,
-    "Sifre": "minaakbas"
+    "AktifMi": true
   },
   {
     "Id": 4,
     "AdSoyad": "Taylan Ergin",
     "UzmanlikAlani": "Cross Training",
     "Eposta": "taylan.ergin@fitreserve.com",
+    "Sifre": "taylanergin",
     "Telefon": "0553 691 20 74",
-    "AktifMi": true,
-    "Sifre": "taylanergin"
+    "AktifMi": true
   },
   {
     "Id": 5,
     "AdSoyad": "Ece Karahan",
     "UzmanlikAlani": "Kardiyo ve Zumba",
     "Eposta": "ece.karahan@fitreserve.com",
+    "Sifre": "ecekarahan",
     "Telefon": "0536 125 98 43",
-    "AktifMi": true,
-    "Sifre": "ecekarahan"
+    "AktifMi": true
   },
   {
     "Id": 6,
     "AdSoyad": "Bora Sancak",
     "UzmanlikAlani": "Boks",
     "Eposta": "bora.sancak@fitreserve.com",
+    "Sifre": "borasancak",
     "Telefon": "0544 782 61 05",
-    "AktifMi": true,
-    "Sifre": "borasancak"
+    "AktifMi": true
   },
   {
     "Id": 8,
     "AdSoyad": "Aylin Karan",
     "UzmanlikAlani": "Spinning",
     "Eposta": "aylin.karan@fitreserve.com",
+    "Sifre": "aylinkaran",
     "Telefon": "0532 640 91 27",
-    "AktifMi": true,
-    "Sifre": "aylinkaran"
+    "AktifMi": true
+  },
+  {
+    "Id": 9,
+    "AdSoyad": "Doruk Sen",
+    "UzmanlikAlani": "Yuzme ve Kondisyon",
+    "Eposta": "doruk.sen@fitreserve.com",
+    "Sifre": "doruksen",
+    "Telefon": "0541 283 70 46",
+    "AktifMi": true
   }
 ]
