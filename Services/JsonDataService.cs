@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Linq;
 using FitReserve.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace FitReserve.Services;
 
@@ -43,9 +44,13 @@ public class JsonDataService
     private readonly string _dataKlasoru;
     private readonly JsonSerializerOptions _jsonAyarlar;
 
-    public JsonDataService(IWebHostEnvironment ortam)
+    public JsonDataService(IWebHostEnvironment ortam, IConfiguration configuration)
     {
-        _dataKlasoru = Path.Combine(ortam.ContentRootPath, "Data");
+        var customPath = configuration["DataFolder"];
+        _dataKlasoru = !string.IsNullOrWhiteSpace(customPath) 
+            ? customPath 
+            : Path.Combine(ortam.ContentRootPath, "Data");
+
         Directory.CreateDirectory(_dataKlasoru);
 
         _jsonAyarlar = new JsonSerializerOptions
