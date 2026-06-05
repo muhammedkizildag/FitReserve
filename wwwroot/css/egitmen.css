@@ -30,6 +30,10 @@ body.egitmen-body {
     overflow-x: hidden;
 }
 
+.text-muted {
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
 .egitmen-kapsayici {
     display: flex;
     min-height: 100vh;

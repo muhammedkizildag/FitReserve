@@ -79,5 +79,104 @@
     "OkunduMu": true,
     "AliciUyeId": 1,
     "AliciEgitmenId": null
+  },
+  {
+    "Id": 10,
+    "Baslik": "Grup Dersi Rezervasyonu",
+    "Mesaj": "\u0027Cross Training\u0027 dersine rezervasyonunuz basariyla yapildi. Baslangic: 07.06.2026 18:00",
+    "GonderimTarihi": "2026-06-04T21:36:30.4784379+00:00",
+    "OkunduMu": true,
+    "AliciUyeId": 1,
+    "AliciEgitmenId": null
+  },
+  {
+    "Id": 11,
+    "Baslik": "Grup Dersi Rezervasyonu",
+    "Mesaj": "\u0027Cross Training\u0027 dersine rezervasyonunuz basariyla yapildi. Baslangic: 05.06.2026 18:00",
+    "GonderimTarihi": "2026-06-04T21:41:20.9301851+00:00",
+    "OkunduMu": true,
+    "AliciUyeId": 2,
+    "AliciEgitmenId": null
+  },
+  {
+    "Id": 12,
+    "Baslik": "Grup Dersi Rezervasyonu",
+    "Mesaj": "\u0027Cross Training\u0027 dersine rezervasyonunuz basariyla yapildi. Baslangic: 05.06.2026 18:00",
+    "GonderimTarihi": "2026-06-04T21:41:51.4795348+00:00",
+    "OkunduMu": true,
+    "AliciUyeId": 3,
+    "AliciEgitmenId": null
+  },
+  {
+    "Id": 13,
+    "Baslik": "Grup Dersi Rezervasyonu",
+    "Mesaj": "\u0027Cross Training\u0027 dersine rezervasyonunuz basariyla yapildi. Baslangic: 05.06.2026 18:00",
+    "GonderimTarihi": "2026-06-04T21:42:21.3403898+00:00",
+    "OkunduMu": true,
+    "AliciUyeId": 4,
+    "AliciEgitmenId": null
+  },
+  {
+    "Id": 14,
+    "Baslik": "Grup Dersi Rezervasyonu",
+    "Mesaj": "\u0027Cross Training\u0027 dersine rezervasyonunuz basariyla yapildi. Baslangic: 05.06.2026 18:00",
+    "GonderimTarihi": "2026-06-04T21:42:49.473702+00:00",
+    "OkunduMu": true,
+    "AliciUyeId": 5,
+    "AliciEgitmenId": null
+  },
+  {
+    "Id": 15,
+    "Baslik": "Grup Dersi Rezervasyonu",
+    "Mesaj": "\u0027Cross Training\u0027 dersine rezervasyonunuz basariyla yapildi. Baslangic: 05.06.2026 18:00",
+    "GonderimTarihi": "2026-06-04T21:43:10.2181862+00:00",
+    "OkunduMu": true,
+    "AliciUyeId": 7,
+    "AliciEgitmenId": null
+  },
+  {
+    "Id": 16,
+    "Baslik": "Grup Dersi Rezervasyonu",
+    "Mesaj": "\u0027Cross Training\u0027 dersine rezervasyonunuz basariyla yapildi. Baslangic: 07.06.2026 18:00",
+    "GonderimTarihi": "2026-06-04T21:43:37.2431355+00:00",
+    "OkunduMu": true,
+    "AliciUyeId": 11,
+    "AliciEgitmenId": null
+  },
+  {
+    "Id": 17,
+    "Baslik": "Grup Dersi Rezervasyonu",
+    "Mesaj": "\u0027Cross Training\u0027 dersine rezervasyonunuz basariyla yapildi. Baslangic: 07.06.2026 18:00",
+    "GonderimTarihi": "2026-06-04T21:44:07.4969301+00:00",
+    "OkunduMu": true,
+    "AliciUyeId": 10,
+    "AliciEgitmenId": null
+  },
+  {
+    "Id": 18,
+    "Baslik": "Yeni egitmen kayit talebi",
+    "Mesaj": "G\u00F6khan \u00C7oban egitmen olarak kayit olmak istiyor.",
+    "GonderimTarihi": "2026-06-04T21:48:50.6404382+00:00",
+    "OkunduMu": true,
+    "AliciUyeId": null,
+    "AliciEgitmenId": null
+  },
+  {
+    "Id": 19,
+    "Baslik": "Grup Dersi Rezervasyonu",
+    "Mesaj": "\u0027Nefes ve Esneklik\u0027 dersine rezervasyonunuz basariyla yapildi. Baslangic: 05.06.2026 09:00",
+    "GonderimTarihi": "2026-06-05T05:55:58.2693134+00:00",
+    "OkunduMu": true,
+    "AliciUyeId": 1,
+    "AliciEgitmenId": null
+  },
+  {
+    "Id": 20,
+    "Baslik": "Yeni egitmen kayit talebi",
+    "Mesaj": "Ferhat \u0130nce egitmen olarak kayit olmak istiyor.",
+    "GonderimTarihi": "2026-06-05T06:30:58.4325998+00:00",
+    "OkunduMu": true,
+    "AliciUyeId": null,
+    "AliciEgitmenId": null
   }
 ]

@@ -36,7 +36,7 @@
     "BaslangicZamani": "2026-06-05T18:00:00",
     "SureDakika": 50,
     "Kapasite": 6,
-    "KatilimciSayisi": 1,
+    "KatilimciSayisi": 6,
     "IptalMi": false
   },
   {
@@ -56,7 +56,7 @@
     "BaslangicZamani": "2026-06-05T09:00:00",
     "SureDakika": 45,
     "Kapasite": 8,
-    "KatilimciSayisi": 0,
+    "KatilimciSayisi": 1,
     "IptalMi": false
   },
   {
@@ -105,8 +105,8 @@
     "EgitmenAdi": "Taylan Ergin",
     "BaslangicZamani": "2026-06-07T18:00:00",
     "SureDakika": 50,
-    "Kapasite": 12,
-    "KatilimciSayisi": 0,
+    "Kapasite": 8,
+    "KatilimciSayisi": 3,
     "IptalMi": false
   },
   {

@@ -30,6 +30,10 @@ body.uye-body {
     overflow-x: hidden;
 }
 
+.text-muted {
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
 .uye-kapsayici {
     display: flex;
     min-height: 100vh;
@@ -476,6 +480,10 @@ body.uye-body {
     content: '✓';
     color: var(--accent-indigo);
     font-weight: 700;
+}
+
+.paket-ozellikler li.text-muted::before {
+    color: rgba(255, 255, 255, 0.25) !important;
 }
 
 /* Scheduler / Booking List */

@@ -29,6 +29,10 @@ body {
     overflow-x: hidden;
 }
 
+.text-muted {
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
 .admin-kapsayici {
     display: flex;
     min-height: 100vh;
